@@ -17,7 +17,7 @@ public class Hand(List<Card> karte, float bet)
             }
             else
             {
-                totalValue += card.Value(isAceHigh);
+                totalValue += CardValue(card, isAceHigh);
             }
         }
 
@@ -28,4 +28,7 @@ public class Hand(List<Card> karte, float bet)
         }
         return totalValue;
     }
+
+    private static int CardValue(Card card, bool isAceHigh)
+        => card.Rank == "A" ? isAceHigh ? 11 : 1 : card.Rank is "K" or "Q" or "J" ? 10 : int.Parse(card.Rank);
 }

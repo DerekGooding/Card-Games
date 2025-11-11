@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-//popraviti resolve da sve lepo resi
-namespace Poker;
+﻿namespace Poker;
 
 public class Player
 {

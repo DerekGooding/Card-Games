@@ -12,9 +12,8 @@ public partial class Form1 : Form
     readonly List<Panel> _playerpanels = [];
     private static Image GetCardImage(Card card)
     {
-
-        var imageName = $"{card.Rank}{card.Suit}.png";
-        return Image.FromFile($"\\Resources\\{imageName}");
+        var manager = Properties.Resources.ResourceManager;
+        return (Image)manager.GetObject(card.ImageName);
     }
     private void CheckIfRoundOver()//premestiti ovu funkciju, naci joj advekvatno mesto.
     {
@@ -148,10 +147,7 @@ public partial class Form1 : Form
         UpdatePlayerPanels();
     }
 
-    private void Form1_Load(object sender, EventArgs e)
-    {
-
-    }
+    private void Form1_Load(object sender, EventArgs e) { }
 
     private void Betting_button_Click(object sender, EventArgs e)
     {

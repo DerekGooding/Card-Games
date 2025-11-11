@@ -2,25 +2,16 @@
 
 namespace Poker.Logic;
 
-public class BlackjackGame
+public class BlackjackGame(List<Player> players, int numberOfDecks, Player dealer)
 {
     public int CurrentPlayerIndex { get; set; }
-    public List<Player> Players { get; set; } = [];
-    public Deck GameDeck { get; set; }
+    public List<Player> Players { get; set; } = players;
+    public Deck GameDeck { get; set; } = new Deck(numberOfDecks);
     public List<Player> Broke { get; set; } = [];
-    public Player Dealer { get; set; }
+    public Player Dealer { get; set; } = dealer;
     private Player CurrentPlayer => Players[CurrentPlayerIndex].IsDealer
         ? throw new Exception("Dealer cannot be current player")
         : Players[CurrentPlayerIndex];
-
-    public BlackjackGame(List<Player> players, int numberOfDecks, Player dealer)
-    {
-        Dealer = dealer;
-        Players = players;
-        GameDeck = new Deck(numberOfDecks);
-        GameDeck.Shuffle();
-        CurrentPlayerIndex = 0;
-    }
 
     public void Start1()
     {

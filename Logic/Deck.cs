@@ -2,14 +2,20 @@
 
 namespace Poker.Logic;
 
-public class Deck(int numberOfDecks)
+public class Deck
 {
     private readonly Random _random = Random.Shared;
     private static readonly string[] _ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
     private static readonly string[] _suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
 
-    public List<Card> CardsAll { get; } =
+    public Deck(int numberOfDecks)
+    {
+        CardsAll =
         [.. _ranks.SelectMany(r => _suits.SelectMany(s => Enumerable.Repeat(new Card(r, s), numberOfDecks)))];
+        Shuffle();
+    }
+
+    public List<Card> CardsAll { get; }
     public List<Card> UsedCards { get; } = [];
 
     public void Shuffle()

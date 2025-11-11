@@ -14,7 +14,7 @@ public partial class Form1 : Form
     {
 
         var imageName = $"{card.Rank}{card.Suit}.png";
-        return Image.FromFile($"E:\\projekti\\Poker\\Resources\\{imageName}");
+        return Image.FromFile($"\\Resources\\{imageName}");
     }
     private void CheckIfRoundOver()//premestiti ovu funkciju, naci joj advekvatno mesto.
     {

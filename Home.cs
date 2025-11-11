@@ -6,17 +6,17 @@ public partial class Home : Form
     {
         InitializeComponent();
     }
-    bool blackjack = false;
-    bool poker = false;
+    bool _blackjack = false;
+    bool _poker = false;
     private void Blackjack_Click(object sender, EventArgs e)
     {
-        poker = false;
-        blackjack = true;
+        _poker = false;
+        _blackjack = true;
     }
     public List<string> listnames = [];
     public List<int> listbalances = [];
 
-    private void addplayer_Click(object sender, EventArgs e)
+    private void Addplayer_Click(object sender, EventArgs e)
     {
         if (Name.Text == "" || Balance.Text == "")
         {
@@ -44,7 +44,7 @@ public partial class Home : Form
         Balance.Clear();
     }
 
-    private void start_Click(object sender, EventArgs e)
+    private void Start_Click(object sender, EventArgs e)
     {
         Form1 form1 = new Form1(listnames, listbalances);
         form1.Show();

@@ -78,7 +78,7 @@
             this.addplayer.TabIndex = 4;
             this.addplayer.Text = "Add";
             this.addplayer.UseVisualStyleBackColor = true;
-            this.addplayer.Click += new System.EventHandler(this.addplayer_Click);
+            this.addplayer.Click += new System.EventHandler(this.Addplayer_Click);
             // 
             // textBox1
             // 
@@ -99,7 +99,7 @@
             this.start.TabIndex = 6;
             this.start.Text = "Start";
             this.start.UseVisualStyleBackColor = true;
-            this.start.Click += new System.EventHandler(this.start_Click);
+            this.start.Click += new System.EventHandler(this.Start_Click);
             // 
             // Home
             // 

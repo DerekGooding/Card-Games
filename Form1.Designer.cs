@@ -98,7 +98,7 @@
             this.bet_amount.Name = "bet_amount";
             this.bet_amount.Size = new System.Drawing.Size(117, 45);
             this.bet_amount.TabIndex = 5;
-            this.bet_amount.Scroll += new System.EventHandler(this.bet_amount_Scroll);
+            this.bet_amount.Scroll += new System.EventHandler(this.Bet_amount_Scroll);
             // 
             // panel1
             // 
@@ -131,7 +131,7 @@
             this.betting_button.TabIndex = 6;
             this.betting_button.Text = "Bet";
             this.betting_button.UseVisualStyleBackColor = true;
-            this.betting_button.Click += new System.EventHandler(this.betting_button_Click);
+            this.betting_button.Click += new System.EventHandler(this.Betting_button_Click);
             // 
             // Start
             // 

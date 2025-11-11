@@ -7,21 +7,21 @@ public partial class Form1 : Form
     public List<int> Balances = [];
     public List<Player> players = [];
     public BlackjackGame game;
-    List<Panel> playerpanels = [];
+    List<Panel> _playerpanels = [];
     private Image GetCardImage(Cards card)
     {
 
         string imageName = $"{card.Rank}{card.CardSuit}.png";
         return Image.FromFile($"E:\\projekti\\Poker\\Resources\\{imageName}");
     }
-    private void checkIfRoundOver()//premestiti ovu funkciju, naci joj advekvatno mesto.
+    private void CheckIfRoundOver()//premestiti ovu funkciju, naci joj advekvatno mesto.
     {
 
-        if (game.isRoundOver())
+        if (game.IsRoundOver())
         {
-            game.resolveRound();
+            game.ResolveRound();
             dilerKarte.Controls.Clear();
-            foreach (var card in game.dealer.Hands[0].Cards)
+            foreach (var card in game.Dealer.Hands[0].Cards)
             {
                 PictureBox cardPicture = new PictureBox();
                 cardPicture.Image = GetCardImage(card);
@@ -30,7 +30,7 @@ public partial class Form1 : Form
                 dilerKarte.Controls.Add(cardPicture);
             }
             MessageBox.Show("Round over. Starting new round.");
-            game.start1();
+            game.Start1();
             betting_button.Show();
             bet_amount.Show();
             bet_show.Show();
@@ -42,22 +42,22 @@ public partial class Form1 : Form
     }
     private void UpdatePlayerPanels()
     {
-        if (game.currentPlayer >= game.Players.Count)
+        if (game.CurrentPlayer >= game.Players.Count)
         {
-            game.currentPlayer--;
-            game.Players[game.currentPlayer].currentHand--;
-            trenutniUlog.Text = "Current bet: " + game.Players[game.currentPlayer].Hands[game.Players[game.currentPlayer].currentHand].bet.ToString();
-            trenutnaRuka.Text = "Current hand number: " + (game.Players[game.currentPlayer].currentHand + 1).ToString();
-            balance.Text = "Balance: " + game.Players[game.currentPlayer].Balance.ToString();
-            game.Players[game.currentPlayer].currentHand++;
-            game.currentPlayer++;
+            game.CurrentPlayer--;
+            game.Players[game.CurrentPlayer].CurrentHand--;
+            trenutniUlog.Text = "Current bet: " + game.Players[game.CurrentPlayer].Hands[game.Players[game.CurrentPlayer].CurrentHand].Bet.ToString();
+            trenutnaRuka.Text = "Current hand number: " + (game.Players[game.CurrentPlayer].CurrentHand + 1).ToString();
+            balance.Text = "Balance: " + game.Players[game.CurrentPlayer].Balance.ToString();
+            game.Players[game.CurrentPlayer].CurrentHand++;
+            game.CurrentPlayer++;
 
         }
         else
         {
-            trenutniUlog.Text = "Current bet: " + game.Players[game.currentPlayer].Hands[game.Players[game.currentPlayer].currentHand].bet.ToString();
-            trenutnaRuka.Text = "Current hand number: " + (game.Players[game.currentPlayer].currentHand + 1).ToString();
-            balance.Text = "Balance: " + game.Players[game.currentPlayer].Balance.ToString();
+            trenutniUlog.Text = "Current bet: " + game.Players[game.CurrentPlayer].Hands[game.Players[game.CurrentPlayer].CurrentHand].Bet.ToString();
+            trenutnaRuka.Text = "Current hand number: " + (game.Players[game.CurrentPlayer].CurrentHand + 1).ToString();
+            balance.Text = "Balance: " + game.Players[game.CurrentPlayer].Balance.ToString();
         }
         ruke.Controls.Clear();
         foreach (var ruka in game.Players[0].Hands)
@@ -76,7 +76,7 @@ public partial class Form1 : Form
               }
         }
         dilerKarte.Controls.Clear();
-        foreach (var card in game.dealer.Hands[0].Cards)
+        foreach (var card in game.Dealer.Hands[0].Cards)
         {
             PictureBox cardPicture = new PictureBox();
             cardPicture.Image = GetCardImage(card);
@@ -84,9 +84,9 @@ public partial class Form1 : Form
             cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
             dilerKarte.Controls.Add(cardPicture);
         }
-        checkIfRoundOver();
+        CheckIfRoundOver();
     }
-    public void hideButtons()
+    public void HideButtons()
     {
         Hit.Hide();
         Stand.Hide();
@@ -97,7 +97,7 @@ public partial class Form1 : Form
     public Form1(List<string> names,List<int> balances)
     {
         InitializeComponent();
-        hideButtons();
+        HideButtons();
         Names = names;
         Balances = balances;
         for(int i = 0; i<Names.Count; i++)
@@ -110,7 +110,7 @@ public partial class Form1 : Form
 
 
     }
-    private int currentBettingPlayer = 0;
+    private int _currentBettingPlayer = 0;
 
     private void Stand_Click(object sender, EventArgs e)
     {
@@ -143,15 +143,15 @@ public partial class Form1 : Form
 
     }
 
-    private void betting_button_Click(object sender, EventArgs e)
+    private void Betting_button_Click(object sender, EventArgs e)
     {
         float bet = bet_amount.Value;
 
 
-        game.Players[currentBettingPlayer].PlaceBet(bet);
+        game.Players[_currentBettingPlayer].PlaceBet(bet);
 
-        currentBettingPlayer++;
-        if (currentBettingPlayer >= game.Players.Count)
+        _currentBettingPlayer++;
+        if (_currentBettingPlayer >= game.Players.Count)
         {
             betting_button.Hide();
             bet_amount.Hide();
@@ -162,15 +162,15 @@ public partial class Form1 : Form
             DoubleDown.Show();
             Split.Show();
             //game.start1();
-            game.start2();
-            currentBettingPlayer = 0;
+            game.Start2();
+            _currentBettingPlayer = 0;
             UpdatePlayerPanels();
 
         }
 
     }
 
-    private void bet_amount_Scroll(object sender, EventArgs e)
+    private void Bet_amount_Scroll(object sender, EventArgs e)
     {
         bet_show.Text = bet_amount.Value.ToString();
 
@@ -178,15 +178,15 @@ public partial class Form1 : Form
 
     private void Start_Click(object sender, EventArgs e)
     {
-        game.start1();
+        game.Start1();
         betting_button.Show();
-        game.currentPlayer = 0;
+        game.CurrentPlayer = 0;
 
 
         Start.Hide();
     }
 
-    private void dealerCards_TextChanged(object sender, EventArgs e)
+    private void DealerCards_TextChanged(object sender, EventArgs e)
     {
 
     }

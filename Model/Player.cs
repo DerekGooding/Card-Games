@@ -1,21 +1,21 @@
 ﻿namespace Poker.Model;
 
-public class Player(string name, float balance)
+public class Player(string name, float balance, bool isDealer = false)
 {
-    public bool IsDealer { get; set; }
+    public bool IsDealer { get; } = isDealer;
     public List<Hand> Hands { get; set; } = [];
-    public int CurrentHand { get; set; }
-    public string Name { get; set; } = name;
+    public int CurrentCardIndex { get; set; }
+    public string Name { get; } = name;
     public float Balance { get; set; } = balance;
-    public List<float> Bets { get; set; } = [];
+    public List<float> Bets { get; } = [];
 
-    public bool IsDone() => CurrentHand >= Hands.Count;
+    public bool IsDone() => CurrentCardIndex >= Hands.Count;
 
     public void PlaceBet(float amount)
     {
         if (amount <= Balance)
         {
-            Hands[CurrentHand].Bet = amount;
+            Hands[CurrentCardIndex].Bet = amount;
             Balance -= amount;
         }
         else

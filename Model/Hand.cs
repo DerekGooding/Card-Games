@@ -21,7 +21,6 @@ public class Hand(List<Card> karte, float bet)
             }
         }
 
-        // Handle aces as 1 if needed to avoid busting
         while (totalValue > 21 && aceCount > 0)
         {
             totalValue -= 10;

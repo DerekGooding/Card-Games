@@ -30,7 +30,7 @@ public class BlackjackGame
         foreach (var player in Players)
         {
             GameDeck.ClearPlayer(player);
-            player.CurrentHand = 0;
+            player.CurrentCardIndex = 0;
             var newHand = new Hand([], 0);
             player.Hands.Add(newHand);
         }
@@ -129,7 +129,7 @@ public class BlackjackGame
     public void Split()
     {
         var player = CurrentPlayer;
-        var handNum = player.CurrentHand;
+        var handNum = player.CurrentCardIndex;
         if (player.Hands[handNum].Cards.Count == 2 && player.Hands[handNum].Cards[0].Rank == player.Hands[handNum].Cards[1].Rank)
         {
 
@@ -137,14 +137,14 @@ public class BlackjackGame
             player.Hands[handNum].Cards.RemoveAt(1);
             List<Card> temp2 = [temp]; //hopefully this works
             //umesto add pozvati constructor
-            var newHand = new Hand(temp2, player.Hands[player.CurrentHand].Bet);
-            player.Balance -= player.Hands[player.CurrentHand].Bet; //deduct bet for new hand
+            var newHand = new Hand(temp2, player.Hands[player.CurrentCardIndex].Bet);
+            player.Balance -= player.Hands[player.CurrentCardIndex].Bet; //deduct bet for new hand
             player.Hands.Add(newHand);
 
             GameDeck.DealBlackjack(player);
-            player.CurrentHand++; //have to do this as the deal functions only affects current hand
+            player.CurrentCardIndex++; //have to do this as the deal functions only affects current hand
             GameDeck.DealBlackjack(player);
-            player.CurrentHand--;
+            player.CurrentCardIndex--;
 
         }
     }
@@ -152,11 +152,11 @@ public class BlackjackGame
     {
         var player = CurrentPlayer;
         GameDeck.DealBlackjack(player);
-        if (player.Hands[player.CurrentHand].GetHandValue() > 21)
+        if (player.Hands[player.CurrentCardIndex].GetHandValue() > 21)
         {
-            Dealer.Balance += player.Hands[player.CurrentHand].Bet; //fix
-            player.Hands[player.CurrentHand].Bet = 0;
-            player.CurrentHand++;
+            Dealer.Balance += player.Hands[player.CurrentCardIndex].Bet; //fix
+            player.Hands[player.CurrentCardIndex].Bet = 0;
+            player.CurrentCardIndex++;
             if (player.IsDone())
                 CurrentPlayerIndex++;
 
@@ -165,7 +165,7 @@ public class BlackjackGame
     public void Stand()
     {
         var player = CurrentPlayer;
-        player.CurrentHand++;
+        player.CurrentCardIndex++;
         if (player.IsDone())
             CurrentPlayerIndex++;
         // player.currentHand--;
@@ -173,17 +173,17 @@ public class BlackjackGame
     public void DoubleDown()
     {
         var player = CurrentPlayer;
-        if (player.Balance >= player.Hands[player.CurrentHand].Bet)
+        if (player.Balance >= player.Hands[player.CurrentCardIndex].Bet)
         {
-            player.Hands[player.CurrentHand].Bet *= 2;
-            player.Balance -= player.Hands[player.CurrentHand].Bet / 2;
+            player.Hands[player.CurrentCardIndex].Bet *= 2;
+            player.Balance -= player.Hands[player.CurrentCardIndex].Bet / 2;
 
             GameDeck.DealBlackjack(player);
-            if (player.Hands[player.CurrentHand].GetHandValue() > 21)
+            if (player.Hands[player.CurrentCardIndex].GetHandValue() > 21)
             {
-                Dealer.Balance += player.Hands[player.CurrentHand].Bet;
-                player.Hands[player.CurrentHand].Bet = 0;
-                player.CurrentHand++;
+                Dealer.Balance += player.Hands[player.CurrentCardIndex].Bet;
+                player.Hands[player.CurrentCardIndex].Bet = 0;
+                player.CurrentCardIndex++;
                 if (player.IsDone())//check for error
                     CurrentPlayerIndex++;
             }

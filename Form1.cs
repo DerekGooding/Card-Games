@@ -24,7 +24,7 @@ public partial class Form1 : Form
             var player = new Player(_names[i], _balances[i]);
             _players.Add(player);
         }
-        var dealer = new Player("Dealer", 10000) { IsDealer = true };
+        var dealer = new Player("Dealer", 10000, true);
         _game = new BlackjackGame(_players, 6, dealer);
     }
 
@@ -60,18 +60,18 @@ public partial class Form1 : Form
         if (_game.CurrentPlayerIndex >= _game.Players.Count)
         {
             _game.CurrentPlayerIndex--;
-            _game.Players[_game.CurrentPlayerIndex].CurrentHand--;
-            trenutniUlog.Text = "Current bet: " + _game.Players[_game.CurrentPlayerIndex].Hands[_game.Players[_game.CurrentPlayerIndex].CurrentHand].Bet.ToString();
-            trenutnaRuka.Text = "Current hand number: " + (_game.Players[_game.CurrentPlayerIndex].CurrentHand + 1).ToString();
+            _game.Players[_game.CurrentPlayerIndex].CurrentCardIndex--;
+            trenutniUlog.Text = "Current bet: " + _game.Players[_game.CurrentPlayerIndex].Hands[_game.Players[_game.CurrentPlayerIndex].CurrentCardIndex].Bet.ToString();
+            trenutnaRuka.Text = "Current hand number: " + (_game.Players[_game.CurrentPlayerIndex].CurrentCardIndex + 1).ToString();
             balance.Text = "Balance: " + _game.Players[_game.CurrentPlayerIndex].Balance.ToString();
-            _game.Players[_game.CurrentPlayerIndex].CurrentHand++;
+            _game.Players[_game.CurrentPlayerIndex].CurrentCardIndex++;
             _game.CurrentPlayerIndex++;
 
         }
         else
         {
-            trenutniUlog.Text = "Current bet: " + _game.Players[_game.CurrentPlayerIndex].Hands[_game.Players[_game.CurrentPlayerIndex].CurrentHand].Bet.ToString();
-            trenutnaRuka.Text = "Current hand number: " + (_game.Players[_game.CurrentPlayerIndex].CurrentHand + 1).ToString();
+            trenutniUlog.Text = "Current bet: " + _game.Players[_game.CurrentPlayerIndex].Hands[_game.Players[_game.CurrentPlayerIndex].CurrentCardIndex].Bet.ToString();
+            trenutnaRuka.Text = "Current hand number: " + (_game.Players[_game.CurrentPlayerIndex].CurrentCardIndex + 1).ToString();
             balance.Text = "Balance: " + _game.Players[_game.CurrentPlayerIndex].Balance.ToString();
         }
         ruke.Controls.Clear();

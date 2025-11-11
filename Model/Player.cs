@@ -9,18 +9,14 @@ public class Player(string name, float balance, bool isDealer = false)
     public float Balance { get; set; } = balance;
     public List<float> Bets { get; } = [];
 
-    public bool IsDone() => CurrentCardIndex >= Hands.Count;
+    public bool IsDone => CurrentCardIndex >= Hands.Count;
 
     public void PlaceBet(float amount)
     {
-        if (amount <= Balance)
-        {
-            Hands[CurrentCardIndex].Bet = amount;
-            Balance -= amount;
-        }
-        else
-        {
-            throw new Exception("Insufficient balance to place bet.");
-        }
+        if (amount <= Balance) throw new Exception("Insufficient balance to place bet.");
+
+        Hands[CurrentCardIndex].Bet = amount;
+        Balance -= amount;
+
     }
 }

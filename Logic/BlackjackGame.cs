@@ -157,7 +157,7 @@ public class BlackjackGame
             Dealer.Balance += player.Hands[player.CurrentCardIndex].Bet; //fix
             player.Hands[player.CurrentCardIndex].Bet = 0;
             player.CurrentCardIndex++;
-            if (player.IsDone())
+            if (player.IsDone)
                 CurrentPlayerIndex++;
 
         }
@@ -166,7 +166,7 @@ public class BlackjackGame
     {
         var player = CurrentPlayer;
         player.CurrentCardIndex++;
-        if (player.IsDone())
+        if (player.IsDone)
             CurrentPlayerIndex++;
         // player.currentHand--;
     }
@@ -184,7 +184,7 @@ public class BlackjackGame
                 Dealer.Balance += player.Hands[player.CurrentCardIndex].Bet;
                 player.Hands[player.CurrentCardIndex].Bet = 0;
                 player.CurrentCardIndex++;
-                if (player.IsDone())//check for error
+                if (player.IsDone)
                     CurrentPlayerIndex++;
             }
             else

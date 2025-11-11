@@ -164,8 +164,8 @@ public class Game
     public int NumberOfDecks { get; set; }
     public Game(List<Player> players, int numberOfDecks)
     {
-        this.Players=players;
-        this.NumberOfDecks = numberOfDecks;
+        Players=players;
+        NumberOfDecks = numberOfDecks;
         GameDeck = new Deck(numberOfDecks);
         GameDeck.Shuffle();
         currentPlayer = 0;

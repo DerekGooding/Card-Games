@@ -48,6 +48,6 @@ public partial class Home : Form
     {
         Form1 form1 = new Form1(listnames, listbalances);
         form1.Show();
-        this.Hide();
+        Hide();
     }
 }

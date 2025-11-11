@@ -31,13 +31,13 @@ public partial class Form1 : Form
             }
             MessageBox.Show("Round over. Starting new round.");
             game.start1();
-            this.betting_button.Show();
-            this.bet_amount.Show();
-            this.bet_show.Show();
-            this.Split.Hide();
-            this.Hit.Hide();
-            this.Stand.Hide();
-            this.DoubleDown.Hide();
+            betting_button.Show();
+            bet_amount.Show();
+            bet_show.Show();
+            Split.Hide();
+            Hit.Hide();
+            Stand.Hide();
+            DoubleDown.Hide();
         }
     }
     private void UpdatePlayerPanels()
@@ -88,18 +88,18 @@ public partial class Form1 : Form
     }
     public void hideButtons()
     {
-        this.Hit.Hide();
-        this.Stand.Hide();
-        this.DoubleDown.Hide();
-        this.Split.Hide();
-        this.betting_button.Hide();
+        Hit.Hide();
+        Stand.Hide();
+        DoubleDown.Hide();
+        Split.Hide();
+        betting_button.Hide();
     }
     public Form1(List<string> names,List<int> balances)
     {
         InitializeComponent();
         hideButtons();
-        this.Names = names;
-        this.Balances = balances;
+        Names = names;
+        Balances = balances;
         for(int i = 0; i<Names.Count; i++)
         {
             Blackjackplayer player = new Blackjackplayer(Names[i], Balances[i]);
@@ -153,14 +153,14 @@ public partial class Form1 : Form
         currentBettingPlayer++;
         if (currentBettingPlayer >= game.Players.Count)
         {
-            this.betting_button.Hide();
-            this.bet_amount.Hide();
-            this.bet_show.Hide();
+            betting_button.Hide();
+            bet_amount.Hide();
+            bet_show.Hide();
 
-            this.Hit.Show();
-            this.Stand.Show();
-            this.DoubleDown.Show();
-            this.Split.Show();
+            Hit.Show();
+            Stand.Show();
+            DoubleDown.Show();
+            Split.Show();
             //game.start1();
             game.start2();
             currentBettingPlayer = 0;
@@ -172,18 +172,18 @@ public partial class Form1 : Form
 
     private void bet_amount_Scroll(object sender, EventArgs e)
     {
-        this.bet_show.Text = bet_amount.Value.ToString();
+        bet_show.Text = bet_amount.Value.ToString();
 
     }
 
     private void Start_Click(object sender, EventArgs e)
     {
         game.start1();
-        this.betting_button.Show();
+        betting_button.Show();
         game.currentPlayer = 0;
 
 
-        this.Start.Hide();
+        Start.Hide();
     }
 
     private void dealerCards_TextChanged(object sender, EventArgs e)

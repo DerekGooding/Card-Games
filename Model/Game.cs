@@ -4,7 +4,7 @@ namespace Poker.Model;
 
 public class Game
 {
-    public int CurrentPlayer { get; set; } = 0;
+    public int CurrentPlayer { get; set; }
     public List<Player> Players { get; set; } = [];
     public Deck GameDeck { get; set; }
     public int NumberOfDecks { get; set; }

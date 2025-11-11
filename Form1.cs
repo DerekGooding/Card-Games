@@ -6,19 +6,18 @@ namespace Poker;
 
 public partial class Form1 : Form
 {
-    public List<string> Names = [];
-    public List<int> Balances = [];
-    public List<Player> players = [];
-    public BlackjackGame game;
+    private readonly List<string> _names = [];
+    private readonly List<int> _balances = [];
+    private readonly List<Player> _players = [];
+    private readonly BlackjackGame _game;
     readonly List<Panel> _playerpanels = [];
-    private void CheckIfRoundOver()//premestiti ovu funkciju, naci joj advekvatno mesto.
+    private void CheckIfRoundOver()
     {
-
-        if (game.IsRoundOver())
+        if (_game.IsRoundOver())
         {
-            game.ResolveRound();
+            _game.ResolveRound();
             dilerKarte.Controls.Clear();
-            foreach (var card in game.Dealer.Hands[0].Cards)
+            foreach (var card in _game.Dealer.Hands[0].Cards)
             {
                 var cardPicture = new PictureBox
                 {
@@ -29,7 +28,7 @@ public partial class Form1 : Form
                 dilerKarte.Controls.Add(cardPicture);
             }
             MessageBox.Show("Round over. Starting new round.");
-            game.Start1();
+            _game.Start1();
             betting_button.Show();
             bet_amount.Show();
             bet_show.Show();
@@ -41,25 +40,25 @@ public partial class Form1 : Form
     }
     private void UpdatePlayerPanels()
     {
-        if (game.CurrentPlayer >= game.Players.Count)
+        if (_game.CurrentPlayer >= _game.Players.Count)
         {
-            game.CurrentPlayer--;
-            game.Players[game.CurrentPlayer].CurrentHand--;
-            trenutniUlog.Text = "Current bet: " + game.Players[game.CurrentPlayer].Hands[game.Players[game.CurrentPlayer].CurrentHand].Bet.ToString();
-            trenutnaRuka.Text = "Current hand number: " + (game.Players[game.CurrentPlayer].CurrentHand + 1).ToString();
-            balance.Text = "Balance: " + game.Players[game.CurrentPlayer].Balance.ToString();
-            game.Players[game.CurrentPlayer].CurrentHand++;
-            game.CurrentPlayer++;
+            _game.CurrentPlayer--;
+            _game.Players[_game.CurrentPlayer].CurrentHand--;
+            trenutniUlog.Text = "Current bet: " + _game.Players[_game.CurrentPlayer].Hands[_game.Players[_game.CurrentPlayer].CurrentHand].Bet.ToString();
+            trenutnaRuka.Text = "Current hand number: " + (_game.Players[_game.CurrentPlayer].CurrentHand + 1).ToString();
+            balance.Text = "Balance: " + _game.Players[_game.CurrentPlayer].Balance.ToString();
+            _game.Players[_game.CurrentPlayer].CurrentHand++;
+            _game.CurrentPlayer++;
 
         }
         else
         {
-            trenutniUlog.Text = "Current bet: " + game.Players[game.CurrentPlayer].Hands[game.Players[game.CurrentPlayer].CurrentHand].Bet.ToString();
-            trenutnaRuka.Text = "Current hand number: " + (game.Players[game.CurrentPlayer].CurrentHand + 1).ToString();
-            balance.Text = "Balance: " + game.Players[game.CurrentPlayer].Balance.ToString();
+            trenutniUlog.Text = "Current bet: " + _game.Players[_game.CurrentPlayer].Hands[_game.Players[_game.CurrentPlayer].CurrentHand].Bet.ToString();
+            trenutnaRuka.Text = "Current hand number: " + (_game.Players[_game.CurrentPlayer].CurrentHand + 1).ToString();
+            balance.Text = "Balance: " + _game.Players[_game.CurrentPlayer].Balance.ToString();
         }
         ruke.Controls.Clear();
-        foreach (var ruka in game.Players[0].Hands)
+        foreach (var ruka in _game.Players[0].Hands)
         {
             var ruka1 = new FlowLayoutPanel
             {
@@ -79,7 +78,7 @@ public partial class Form1 : Form
             }
         }
         dilerKarte.Controls.Clear();
-        foreach (var card in game.Dealer.Hands[0].Cards)
+        foreach (var card in _game.Dealer.Hands[0].Cards)
         {
             var cardPicture = new PictureBox
             {
@@ -103,15 +102,15 @@ public partial class Form1 : Form
     {
         InitializeComponent();
         HideButtons();
-        Names = names;
-        Balances = balances;
-        for (var i = 0; i < Names.Count; i++)
+        _names = names;
+        _balances = balances;
+        for (var i = 0; i < _names.Count; i++)
         {
-            var player = new Blackjackplayer(Names[i], Balances[i]);
-            players.Add(player);
+            var player = new Blackjackplayer(_names[i], _balances[i]);
+            _players.Add(player);
         }
         var dealer = new BlackjackDealer();
-        game = new BlackjackGame(players, 6, dealer);
+        _game = new BlackjackGame(_players, 6, dealer);
 
 
     }
@@ -119,27 +118,27 @@ public partial class Form1 : Form
 
     private void Stand_Click(object sender, EventArgs e)
     {
-        game.Stand();
+        _game.Stand();
         UpdatePlayerPanels();
 
     }
 
     private void Hit_Click(object sender, EventArgs e)
     {
-        game.Hit();
+        _game.Hit();
         UpdatePlayerPanels();
 
     }
 
     private void DoubleDown_Click(object sender, EventArgs e)
     {
-        game.DoubleDown();
+        _game.DoubleDown();
         UpdatePlayerPanels();
     }
 
     private void Split_Click(object sender, EventArgs e)
     {
-        game.Split();
+        _game.Split();
         UpdatePlayerPanels();
     }
 
@@ -150,10 +149,10 @@ public partial class Form1 : Form
         float bet = bet_amount.Value;
 
 
-        game.Players[_currentBettingPlayer].PlaceBet(bet);
+        _game.Players[_currentBettingPlayer].PlaceBet(bet);
 
         _currentBettingPlayer++;
-        if (_currentBettingPlayer >= game.Players.Count)
+        if (_currentBettingPlayer >= _game.Players.Count)
         {
             betting_button.Hide();
             bet_amount.Hide();
@@ -164,7 +163,7 @@ public partial class Form1 : Form
             DoubleDown.Show();
             Split.Show();
             //game.start1();
-            game.Start2();
+            _game.Start2();
             _currentBettingPlayer = 0;
             UpdatePlayerPanels();
 
@@ -176,9 +175,9 @@ public partial class Form1 : Form
 
     private void Start_Click(object sender, EventArgs e)
     {
-        game.Start1();
+        _game.Start1();
         betting_button.Show();
-        game.CurrentPlayer = 0;
+        _game.CurrentPlayer = 0;
 
 
         Start.Hide();

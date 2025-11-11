@@ -2,14 +2,5 @@
 
 public class BlackjackDealer : Blackjackplayer
 {
-    public BlackjackDealer() : base("Dealer", 10000)
-    {
-    }
-
-
-
+    public BlackjackDealer() : base("Dealer", 10000) { }
 }
-
-
-
-

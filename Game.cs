@@ -8,7 +8,7 @@ public class Game
     public int NumberOfDecks { get; set; }
     public Game(List<Player> players, int numberOfDecks)
     {
-        Players=players;
+        Players = players;
         NumberOfDecks = numberOfDecks;
         GameDeck = new Deck(numberOfDecks);
         GameDeck.Shuffle();

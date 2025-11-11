@@ -70,8 +70,8 @@ public partial class Form1 : Form
                 BackColor = Color.Transparent
             };
             ruke.Controls.Add(ruka1);
-              foreach(var card in ruka.Cards)
-              {
+            foreach (var card in ruka.Cards)
+            {
                 var cardPicture = new PictureBox
                 {
                     Size = new Size(80, 120),
@@ -79,7 +79,7 @@ public partial class Form1 : Form
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
                 ruka1.Controls.Add(cardPicture);
-              }
+            }
         }
         dilerKarte.Controls.Clear();
         foreach (var card in game.Dealer.Hands[0].Cards)
@@ -102,13 +102,13 @@ public partial class Form1 : Form
         Split.Hide();
         betting_button.Hide();
     }
-    public Form1(List<string> names,List<int> balances)
+    public Form1(List<string> names, List<int> balances)
     {
         InitializeComponent();
         HideButtons();
         Names = names;
         Balances = balances;
-        for(var i = 0; i<Names.Count; i++)
+        for (var i = 0; i < Names.Count; i++)
         {
             var player = new Blackjackplayer(Names[i], Balances[i]);
             players.Add(player);

@@ -25,12 +25,12 @@ public partial class Home : Form
             MessageBox.Show("Please enter a valid balance");
             return;
         }
-        if(listnames.Contains(Name.Text))
+        if (listnames.Contains(Name.Text))
         {
             MessageBox.Show("Player already exists");
             return;
         }
-        if(listnames.Count >= 7)
+        if (listnames.Count >= 7)
         {
             MessageBox.Show("Maximum number of players reached");
             return;

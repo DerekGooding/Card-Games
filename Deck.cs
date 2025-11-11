@@ -9,7 +9,7 @@ public class Deck
         string[] ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
         string[] suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
         NumberOfDecks = numberOfDecks;
-        for (var i = 0; i< numberOfDecks; i++)
+        for (var i = 0; i < numberOfDecks; i++)
         {
             foreach (var rank in ranks)
             {
@@ -61,9 +61,9 @@ public class Deck
     }
     public void ClearPlayer(Player player)
     {
-        if(player.Name=="Dealer")
+        if (player.Name == "Dealer")
         {
-            for (var i = 0; i<player.Hands[player.CurrentHand].Cards.Count; i++)
+            for (var i = 0; i < player.Hands[player.CurrentHand].Cards.Count; i++)
             {
                 UsedCards.Add(player.Hands[player.CurrentHand].Cards[i]);
             }
@@ -72,9 +72,9 @@ public class Deck
         }
         else
         {
-            for (var i = 0; i<player.Hands.Count; i++)
+            for (var i = 0; i < player.Hands.Count; i++)
             {
-                for (var j = 0; j<player.Hands[i].Cards.Count; j++)
+                for (var j = 0; j < player.Hands[i].Cards.Count; j++)
                 {
                     UsedCards.Add(player.Hands[i].Cards[j]);
                 }

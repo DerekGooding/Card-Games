@@ -10,17 +10,17 @@ public partial class Home : Form
 
     private void Addplayer_Click(object sender, EventArgs e)
     {
-        if (Name.Text.Length == 0 || Balance.Text.Length == 0)
+        if (name.Text.Length == 0 || balance.Text.Length == 0)
         {
             MessageBox.Show("Please enter a name and balance");
             return;
         }
-        if (!int.TryParse(Balance.Text, out var n) || n < 0)
+        if (!int.TryParse(balance.Text, out var n) || n < 0)
         {
             MessageBox.Show("Please enter a valid balance");
             return;
         }
-        if (_playerDatas.Any(x => x.Name == Name.Text))
+        if (_playerDatas.Any(x => x.Name == name.Text))
         {
             MessageBox.Show("Player already exists");
             return;
@@ -30,9 +30,12 @@ public partial class Home : Form
             MessageBox.Show("Maximum number of players reached");
             return;
         }
-        _playerDatas.Add(new(Name.Text, n));
-        Name.Clear();
-        Balance.Clear();
+        _playerDatas.Add(new(name.Text, n));
+        var item = new ListViewItem(name.Text);
+        item.SubItems.Add(balance.Text);
+        listView1.Items.Add(item);
+        name.Clear();
+        balance.Clear();
     }
 
     private void Start_Click(object sender, EventArgs e)

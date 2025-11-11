@@ -11,7 +11,7 @@ public partial class Form1 : Form
     private Image GetCardImage(Cards card)
     {
 
-        string imageName = $"{card.Rank}{card.CardSuit}.png";
+        var imageName = $"{card.Rank}{card.CardSuit}.png";
         return Image.FromFile($"E:\\projekti\\Poker\\Resources\\{imageName}");
     }
     private void CheckIfRoundOver()//premestiti ovu funkciju, naci joj advekvatno mesto.
@@ -23,7 +23,7 @@ public partial class Form1 : Form
             dilerKarte.Controls.Clear();
             foreach (var card in game.Dealer.Hands[0].Cards)
             {
-                PictureBox cardPicture = new PictureBox
+                var cardPicture = new PictureBox
                 {
                     Image = GetCardImage(card),
                     Size = new Size(80, 120),
@@ -64,7 +64,7 @@ public partial class Form1 : Form
         ruke.Controls.Clear();
         foreach (var ruka in game.Players[0].Hands)
         {
-            FlowLayoutPanel ruka1 = new FlowLayoutPanel
+            var ruka1 = new FlowLayoutPanel
             {
                 AutoSize = true,
                 BackColor = Color.Transparent
@@ -72,7 +72,7 @@ public partial class Form1 : Form
             ruke.Controls.Add(ruka1);
               foreach(var card in ruka.Cards)
               {
-                PictureBox cardPicture = new PictureBox
+                var cardPicture = new PictureBox
                 {
                     Size = new Size(80, 120),
                     Image = GetCardImage(card),
@@ -84,7 +84,7 @@ public partial class Form1 : Form
         dilerKarte.Controls.Clear();
         foreach (var card in game.Dealer.Hands[0].Cards)
         {
-            PictureBox cardPicture = new PictureBox
+            var cardPicture = new PictureBox
             {
                 Image = GetCardImage(card),
                 Size = new Size(80, 120),
@@ -108,12 +108,12 @@ public partial class Form1 : Form
         HideButtons();
         Names = names;
         Balances = balances;
-        for(int i = 0; i<Names.Count; i++)
+        for(var i = 0; i<Names.Count; i++)
         {
-            Blackjackplayer player = new Blackjackplayer(Names[i], Balances[i]);
+            var player = new Blackjackplayer(Names[i], Balances[i]);
             players.Add(player);
         }
-        BlackjackDealer dealer = new BlackjackDealer();
+        var dealer = new BlackjackDealer();
         game = new BlackjackGame(players, 6, dealer);
 
 

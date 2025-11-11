@@ -23,7 +23,7 @@ public partial class Home : Form
             MessageBox.Show("Please enter a name and balance");
             return;
         }
-        if (!int.TryParse(Balance.Text, out int n) || Convert.ToInt32(Balance.Text) < 0)
+        if (!int.TryParse(Balance.Text, out var n) || Convert.ToInt32(Balance.Text) < 0)
         {
             MessageBox.Show("Please enter a valid balance");
             return;
@@ -46,7 +46,7 @@ public partial class Home : Form
 
     private void Start_Click(object sender, EventArgs e)
     {
-        Form1 form1 = new Form1(listnames, listbalances);
+        var form1 = new Form1(listnames, listbalances);
         form1.Show();
         Hide();
     }

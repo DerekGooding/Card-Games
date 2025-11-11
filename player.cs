@@ -12,8 +12,8 @@ public class Player(string name, float balance)
         public float Bet { get; set; } = bet;
         public int GetHandValue(bool isAceHigh = true)
         {
-            int totalValue = 0;
-            int aceCount = 0;
+            var totalValue = 0;
+            var aceCount = 0;
             foreach (var card in Cards)
             {
                 if (card.Rank == "A")
@@ -78,11 +78,11 @@ public class Deck
         string[] ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
         string[] suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
         NumberOfDecks = numberOfDecks;
-        for (int i = 0; i< numberOfDecks; i++)
+        for (var i = 0; i< numberOfDecks; i++)
         {
-            foreach (string rank in ranks)
+            foreach (var rank in ranks)
             {
-                foreach (string suit in suits)
+                foreach (var suit in suits)
                 {
                     CardsAll.Add(new Cards(rank, suit));
                 }
@@ -92,10 +92,10 @@ public class Deck
     public List<Cards> UsedCards { get; set; } = [];
     public void Shuffle()
     {
-        Random rand = new Random();
-        for (int i = CardsAll.Count - 1; i > 0; i--)
+        var rand = new Random();
+        for (var i = CardsAll.Count - 1; i > 0; i--)
         {
-            int j = rand.Next(0, i + 1);
+            var j = rand.Next(0, i + 1);
             var temp = CardsAll[i];
             CardsAll[i] = CardsAll[j];
             CardsAll[j] = temp;
@@ -105,7 +105,7 @@ public class Deck
     {
         if (CardsAll.Count < 15)
         {
-            for (int i = 0; i < UsedCards.Count; i++)
+            for (var i = 0; i < UsedCards.Count; i++)
             {
                 CardsAll.Add(UsedCards[i]);
                 UsedCards.RemoveAt(i);
@@ -117,10 +117,10 @@ public class Deck
     }
     public void DealBlackjack(Player player)
     {
-        int handnum = player.CurrentHand;
+        var handnum = player.CurrentHand;
         if (CardsAll.Count < 15)
         {
-            for (int i = 0; i < UsedCards.Count; i++)
+            for (var i = 0; i < UsedCards.Count; i++)
             {
                 CardsAll.Add(UsedCards[i]);
                 UsedCards.RemoveAt(i);
@@ -134,7 +134,7 @@ public class Deck
     {
         if(player.Name=="Dealer")
         {
-            for (int i = 0; i<player.Hands[player.CurrentHand].Cards.Count; i++)
+            for (var i = 0; i<player.Hands[player.CurrentHand].Cards.Count; i++)
             {
                 UsedCards.Add(player.Hands[player.CurrentHand].Cards[i]);
             }
@@ -143,9 +143,9 @@ public class Deck
         }
         else
         {
-            for (int i = 0; i<player.Hands.Count; i++)
+            for (var i = 0; i<player.Hands.Count; i++)
             {
-                for (int j = 0; j<player.Hands[i].Cards.Count; j++)
+                for (var j = 0; j<player.Hands[i].Cards.Count; j++)
                 {
                     UsedCards.Add(player.Hands[i].Cards[j]);
                 }
@@ -188,7 +188,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
         {
             GameDeck.ClearPlayer(player);
             player.CurrentHand = 0;
-            Player.Hand newHand = new Player.Hand([], 0);
+            var newHand = new Player.Hand([], 0);
             player.Hands.Add(newHand);
         }
         GameDeck.Shuffle();
@@ -218,12 +218,12 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
     public void ResolveRound()//ne vodi svaki korak do resetovanja igre pa zbaga
     {
         DealerPlay();
-        int dealerValue = Dealer.Hands[0].GetHandValue();
+        var dealerValue = Dealer.Hands[0].GetHandValue();
         foreach(var player in Players)
         {
-            for(int i = 0; i< player.Hands.Count; i++)
+            for(var i = 0; i< player.Hands.Count; i++)
             {
-                int playerValue = (player as Blackjackplayer).Hands[i].GetHandValue();
+                var playerValue = (player as Blackjackplayer).Hands[i].GetHandValue();
                 if (playerValue > 21)
                 {
                     player.Hands[i].Bet = 0;
@@ -290,7 +290,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
     public void DealDealerCards()
 
     {
-        Player.Hand newHand = new Player.Hand([], 0);
+        var newHand = new Player.Hand([], 0);
         Dealer.Hands.Add(newHand);
         GameDeck.Deal(Dealer);
         GameDeck.Deal(Dealer);
@@ -304,16 +304,16 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
     }
     public void Split()
     {
-        Blackjackplayer player = Players[CurrentPlayer ] as Blackjackplayer;
-        int handNum = player.CurrentHand;
+        var player = Players[CurrentPlayer ] as Blackjackplayer;
+        var handNum = player.CurrentHand;
         if ((player.Hands[handNum].Cards.Count== 2)&&(player.Hands[handNum].Cards[0].Rank == player.Hands[handNum].Cards[1].Rank))
         {
 
-            Cards temp = player.Hands[handNum].Cards[1];
+            var temp = player.Hands[handNum].Cards[1];
             player.Hands[handNum].Cards.RemoveAt(1);
             List<Cards> temp2 = [temp]; //hopefully this works
             //umesto add pozvati constructor
-            Player.Hand newHand = new Player.Hand(temp2, player.Hands[player.CurrentHand].Bet);
+            var newHand = new Player.Hand(temp2, player.Hands[player.CurrentHand].Bet);
             player.Balance -= player.Hands[player.CurrentHand].Bet; //deduct bet for new hand
             player.Hands.Add(newHand);
 
@@ -326,7 +326,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
     }
     public void Hit()
     {
-        Blackjackplayer player = Players[CurrentPlayer ] as Blackjackplayer;//nakon betting runde currentplayer je na 1 a treba da je na 0
+        var player = Players[CurrentPlayer ] as Blackjackplayer;//nakon betting runde currentplayer je na 1 a treba da je na 0
         GameDeck.DealBlackjack(player);
         if (player.Hands[player.CurrentHand].GetHandValue()>21)
         {
@@ -348,7 +348,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
     }
     public void Stand()
     {
-        Blackjackplayer player = Players[CurrentPlayer] as Blackjackplayer;
+        var player = Players[CurrentPlayer] as Blackjackplayer;
         player.CurrentHand++;
         if (player.IsDone())
         {
@@ -363,7 +363,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
     }
     public void DoubleDown()
     {
-        Blackjackplayer player = Players[CurrentPlayer ] as Blackjackplayer;
+        var player = Players[CurrentPlayer ] as Blackjackplayer;
         if (player.Balance >= player.Hands[player.CurrentHand].Bet)
         {
             player.Hands[player.CurrentHand].Bet *= 2;

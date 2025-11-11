@@ -1,5 +1,6 @@
 ﻿using Poker.Logic;
 using Poker.Model;
+using Poker.Services;
 
 namespace Poker;
 
@@ -10,11 +11,6 @@ public partial class Form1 : Form
     public List<Player> players = [];
     public BlackjackGame game;
     readonly List<Panel> _playerpanels = [];
-    private static Image GetCardImage(Card card)
-    {
-        var manager = Properties.Resources.ResourceManager;
-        return (Image)manager.GetObject(card.ImageName);
-    }
     private void CheckIfRoundOver()//premestiti ovu funkciju, naci joj advekvatno mesto.
     {
 
@@ -26,7 +22,7 @@ public partial class Form1 : Form
             {
                 var cardPicture = new PictureBox
                 {
-                    Image = GetCardImage(card),
+                    Image = ImageCacheService.Get(card),
                     Size = new Size(80, 120),
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
@@ -76,7 +72,7 @@ public partial class Form1 : Form
                 var cardPicture = new PictureBox
                 {
                     Size = new Size(80, 120),
-                    Image = GetCardImage(card),
+                    Image = ImageCacheService.Get(card),
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
                 ruka1.Controls.Add(cardPicture);
@@ -87,7 +83,7 @@ public partial class Form1 : Form
         {
             var cardPicture = new PictureBox
             {
-                Image = GetCardImage(card),
+                Image = ImageCacheService.Get(card),
                 Size = new Size(80, 120),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };

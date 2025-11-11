@@ -1,6 +1,4 @@
-﻿using Poker.Logic;
-
-namespace Poker.Model;
+﻿namespace Poker.Model;
 
 public class Player(string name, float balance)
 {

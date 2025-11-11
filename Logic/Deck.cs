@@ -30,14 +30,13 @@ public class Deck(int numberOfDecks)
                 UsedCards.RemoveAt(i);
             }
         }
-        player.Hands[player.CurrentHandIndex].Cards.Add(CardsAll[0]);
+        player.CurrentHand.Cards.Add(CardsAll[0]);
         UsedCards.Add(CardsAll[0]);
         CardsAll.RemoveAt(0);
     }
 
     public void DealBlackjack(Player player)
     {
-        var handnum = player.CurrentHandIndex;
         if (CardsAll.Count < 15)
         {
             for (var i = 0; i < UsedCards.Count; i++)
@@ -46,7 +45,7 @@ public class Deck(int numberOfDecks)
                 UsedCards.RemoveAt(i);
             }
         }
-        player.Hands[handnum].Cards.Add(CardsAll[0]);
+        player.CurrentHand.Cards.Add(CardsAll[0]);
         UsedCards.Add(CardsAll[0]);
         CardsAll.RemoveAt(0);
     }

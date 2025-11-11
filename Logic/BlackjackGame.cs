@@ -7,7 +7,6 @@ public class BlackjackGame
     public int CurrentPlayerIndex { get; set; }
     public List<Player> Players { get; set; } = [];
     public Deck GameDeck { get; set; }
-    public int NumberOfDecks { get; set; }
     public List<Player> Broke { get; set; } = [];
     public Player Dealer { get; set; }
     private Player CurrentPlayer => Players[CurrentPlayerIndex].IsDealer
@@ -18,7 +17,6 @@ public class BlackjackGame
     {
         Dealer = dealer;
         Players = players;
-        NumberOfDecks = numberOfDecks;
         GameDeck = new Deck(numberOfDecks);
         GameDeck.Shuffle();
         CurrentPlayerIndex = 0;

@@ -65,18 +65,7 @@ public class Cards(string cardRank, string cardSuit)
 
     public int Value(bool isAceHigh)
     {
-        if (Rank == "A")
-        {
-            return isAceHigh ? 11 : 1;
-        }
-        else if (Rank is "K" or "Q" or "J")
-        {
-            return 10;
-        }
-        else
-        {
-            return int.Parse(Rank);
-        }
+        return Rank == "A" ? isAceHigh ? 11 : 1 : Rank is "K" or "Q" or "J" ? 10 : int.Parse(Rank);
     }
 
 }
@@ -284,14 +273,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
     }
     public bool checkblackjack(Blackjackplayer player)
     {
-        if (player.Hands[0].getHandValue() == 21)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return player.Hands[0].getHandValue() == 21;
     }
 
     public void DealInitialCards()

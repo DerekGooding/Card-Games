@@ -6,9 +6,6 @@ namespace Poker;
 
 public partial class Form1 : Form
 {
-    private readonly List<string> _names = [];
-    private readonly List<int> _balances = [];
-    private readonly List<Player> _players = [];
     private readonly BlackjackGame _game;
     private readonly List<Panel> _playerpanels = [];
     private int _currentBettingPlayer;
@@ -17,20 +14,18 @@ public partial class Form1 : Form
     {
         InitializeComponent();
         HideButtons();
-        _names = names;
-        _balances = balances;
-        for (var i = 0; i < _names.Count; i++)
+        List<Player> players = [];
+        for (var i = 0; i < names.Count; i++)
         {
-            var player = new Player(_names[i], _balances[i]);
-            _players.Add(player);
+            var player = new Player(names[i], balances[i]);
+            players.Add(player);
         }
-        var dealer = new Player("Dealer", 10000, true);
-        _game = new BlackjackGame(_players, 6, dealer);
+        _game = new BlackjackGame(players, 6, new Dealer());
     }
 
     private void CheckIfRoundOver()
     {
-        if (_game.IsRoundOver())
+        if (_game.IsRoundOver)
         {
             _game.ResolveRound();
             dilerKarte.Controls.Clear();
@@ -45,7 +40,7 @@ public partial class Form1 : Form
                 dilerKarte.Controls.Add(cardPicture);
             }
             MessageBox.Show("Round over. Starting new round.");
-            _game.Start1();
+            _game.StartInitial();
             betting_button.Show();
             bet_amount.Show();
             bet_show.Show();
@@ -162,8 +157,7 @@ public partial class Form1 : Form
             Stand.Show();
             DoubleDown.Show();
             Split.Show();
-            //game.start1();
-            _game.Start2();
+            _game.StartAdditional();
             _currentBettingPlayer = 0;
             UpdatePlayerPanels();
 
@@ -175,7 +169,7 @@ public partial class Form1 : Form
 
     private void Start_Click(object sender, EventArgs e)
     {
-        _game.Start1();
+        _game.StartInitial();
         betting_button.Show();
         _game.CurrentPlayerIndex = 0;
 

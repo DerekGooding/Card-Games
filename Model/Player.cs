@@ -1,8 +1,7 @@
 ﻿namespace Poker.Model;
 
-public class Player(string name, float balance, bool isDealer = false)
+public class Player(string name, float balance)
 {
-    public bool IsDealer { get; } = isDealer;
     public List<Hand> Hands { get; set; } = [];
     public int CurrentHandIndex { get; set; }
     public string Name { get; } = name;

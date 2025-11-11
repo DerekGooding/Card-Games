@@ -18,6 +18,7 @@ public class Deck
     public List<Card> CardsAll { get; }
     public List<Card> UsedCards { get; } = [];
 
+    //Fisher-Yates
     public void Shuffle()
     {
         for (var i = CardsAll.Count - 1; i > 0; i--)
@@ -27,15 +28,7 @@ public class Deck
         }
     }
 
-    public void DealCard(Player player)
-    {
-        if (player.IsDealer)
-            HandleDealer(player);
-        else
-            HandlePlayer(player);
-    }
-
-    private void HandleDealer(Player player)
+    public void DealCard(Dealer dealer)
     {
         if (CardsAll.Count < 15)
         {
@@ -45,12 +38,12 @@ public class Deck
                 UsedCards.RemoveAt(i);
             }
         }
-        player.CurrentHand.Cards.Add(CardsAll[0]);
+        dealer.CurrentHand.Cards.Add(CardsAll[0]);
         UsedCards.Add(CardsAll[0]);
         CardsAll.RemoveAt(0);
     }
 
-    private void HandlePlayer(Player player)
+    public void DealCard(Player player)
     {
         if (CardsAll.Count < 15)
         {
@@ -67,26 +60,13 @@ public class Deck
 
     public void ClearPlayer(Player player)
     {
-        if (player.IsDealer)
-        {
-            UsedCards.AddRange(player.CurrentHand.Cards);
-            player.CurrentHand.Cards.Clear();
-        }
-        else
-        {
-            for (var i = 0; i < player.Hands.Count; i++)
-            {
-                for (var j = 0; j < player.Hands[i].Cards.Count; j++)
-                {
-                    UsedCards.Add(player.Hands[i].Cards[j]);
-                }
-            }
-            player.Hands.Clear();
-        }
+        UsedCards.AddRange(player.Hands.SelectMany(x => x.Cards));
+        player.Hands.Clear();
+    }
 
+    public void ClearDealer(Dealer dealer)
+    {
+        UsedCards.AddRange(dealer.CurrentHand.Cards);
+        dealer.CurrentHand.Cards.Clear();
     }
 }
-
-
-
-

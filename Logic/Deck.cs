@@ -2,33 +2,21 @@
 
 namespace Poker.Logic;
 
-public class Deck
+public class Deck(int numberOfDecks)
 {
-    public int NumberOfDecks { get; set; }
-    public List<Card> CardsAll { get; set; } = [];
-    public Deck(int numberOfDecks)
-    {
-        string[] ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-        string[] suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
-        NumberOfDecks = numberOfDecks;
-        for (var i = 0; i < numberOfDecks; i++)
-        {
-            foreach (var rank in ranks)
-            {
-                foreach (var suit in suits)
-                {
-                    CardsAll.Add(new Card(rank, suit));
-                }
-            }
-        }
-    }
-    public List<Card> UsedCards { get; set; } = [];
+    private readonly Random _random = Random.Shared;
+    private static readonly string[] _ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+    private static readonly string[] _suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
+
+    public List<Card> CardsAll { get; } =
+        [.. _ranks.SelectMany(r => _suits.SelectMany(s => Enumerable.Repeat(new Card(r, s), numberOfDecks)))];
+    public List<Card> UsedCards { get; } = [];
+
     public void Shuffle()
     {
-        var rand = new Random();
         for (var i = CardsAll.Count - 1; i > 0; i--)
         {
-            var j = rand.Next(0, i + 1);
+            var j = _random.Next(0, i + 1);
             (CardsAll[j], CardsAll[i]) = (CardsAll[i], CardsAll[j]);
         }
     }
@@ -46,6 +34,7 @@ public class Deck
         UsedCards.Add(CardsAll[0]);
         CardsAll.RemoveAt(0);
     }
+
     public void DealBlackjack(Player player)
     {
         var handnum = player.CurrentCardIndex;
@@ -61,9 +50,10 @@ public class Deck
         UsedCards.Add(CardsAll[0]);
         CardsAll.RemoveAt(0);
     }
+
     public void ClearPlayer(Player player)
     {
-        if (player.Name == "Dealer")
+        if (player.IsDealer)
         {
             for (var i = 0; i < player.Hands[player.CurrentCardIndex].Cards.Count; i++)
             {

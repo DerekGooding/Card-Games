@@ -10,7 +10,24 @@ public partial class Form1 : Form
     private readonly List<int> _balances = [];
     private readonly List<Player> _players = [];
     private readonly BlackjackGame _game;
-    readonly List<Panel> _playerpanels = [];
+    private readonly List<Panel> _playerpanels = [];
+    private int _currentBettingPlayer;
+
+    public Form1(List<string> names, List<int> balances)
+    {
+        InitializeComponent();
+        HideButtons();
+        _names = names;
+        _balances = balances;
+        for (var i = 0; i < _names.Count; i++)
+        {
+            var player = new Blackjackplayer(_names[i], _balances[i]);
+            _players.Add(player);
+        }
+        var dealer = new BlackjackDealer();
+        _game = new BlackjackGame(_players, 6, dealer);
+    }
+
     private void CheckIfRoundOver()
     {
         if (_game.IsRoundOver())
@@ -90,7 +107,7 @@ public partial class Form1 : Form
         }
         CheckIfRoundOver();
     }
-    public void HideButtons()
+    private void HideButtons()
     {
         Hit.Hide();
         Stand.Hide();
@@ -98,23 +115,6 @@ public partial class Form1 : Form
         Split.Hide();
         betting_button.Hide();
     }
-    public Form1(List<string> names, List<int> balances)
-    {
-        InitializeComponent();
-        HideButtons();
-        _names = names;
-        _balances = balances;
-        for (var i = 0; i < _names.Count; i++)
-        {
-            var player = new Blackjackplayer(_names[i], _balances[i]);
-            _players.Add(player);
-        }
-        var dealer = new BlackjackDealer();
-        _game = new BlackjackGame(_players, 6, dealer);
-
-
-    }
-    private int _currentBettingPlayer = 0;
 
     private void Stand_Click(object sender, EventArgs e)
     {
@@ -181,10 +181,5 @@ public partial class Form1 : Form
 
 
         Start.Hide();
-    }
-
-    private void DealerCards_TextChanged(object sender, EventArgs e)
-    {
-
     }
 }

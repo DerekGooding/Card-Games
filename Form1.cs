@@ -178,11 +178,7 @@ public partial class Form1 : Form
 
     }
 
-    private void Bet_amount_Scroll(object sender, EventArgs e)
-    {
-        bet_show.Text = bet_amount.Value.ToString();
-
-    }
+    private void Bet_amount_Scroll(object sender, EventArgs e) => bet_show.Text = bet_amount.Value.ToString();
 
     private void Start_Click(object sender, EventArgs e)
     {

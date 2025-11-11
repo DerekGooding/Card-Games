@@ -39,10 +39,7 @@ public class Player(string name, float balance)
 
     public List<Hand> Hands { get; set; } = [];
     public int CurrentHand { get; set; } = 0;
-    public bool IsDone()
-    {
-        return CurrentHand >= Hands.Count;//ne radi????
-    }
+    public bool IsDone() => CurrentHand >= Hands.Count;//ne radi????
     public void PlaceBet(float amount)
     {
         if (amount <= Balance)
@@ -63,10 +60,7 @@ public class Cards(string cardRank, string cardSuit)
     public string Rank { get; set; } = cardRank;
     public string CardSuit { get; set; } = cardSuit;
 
-    public int Value(bool isAceHigh)
-    {
-        return Rank == "A" ? isAceHigh ? 11 : 1 : Rank is "K" or "Q" or "J" ? 10 : int.Parse(Rank);
-    }
+    public int Value(bool isAceHigh) => Rank == "A" ? isAceHigh ? 11 : 1 : Rank is "K" or "Q" or "J" ? 10 : int.Parse(Rank);
 
 }
 public class Deck
@@ -195,24 +189,9 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
 
         CurrentPlayer = 0;
     }
-    public void Start2()
-    {
-        DealInitialCards();
-        //foreach (var player in Players)
-        //{
-        //    if (checkblackjack(player as Blackjackplayer))
-        //    {
-        //        player.Balance += player.Hands[player.currentHand].bet * 2.5f;//fix
-        //        player.Hands[player.currentHand].bet = 0;
-        //        currentPlayer++;
-        //    }
-        //}
-    }
+    public void Start2() => DealInitialCards();//foreach (var player in Players)//{//    if (checkblackjack(player as Blackjackplayer))//    {//        player.Balance += player.Hands[player.currentHand].bet * 2.5f;//fix//        player.Hands[player.currentHand].bet = 0;//        currentPlayer++;//    }//}
 
-    public bool IsRoundOver()
-    {
-        return CurrentPlayer >= Players.Count;
-    }
+    public bool IsRoundOver() => CurrentPlayer >= Players.Count;
     public void ResolveRound()//ne vodi svaki korak do resetovanja igre pa zbaga
     {
         DealerPlay();
@@ -269,10 +248,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
         }
 
     }
-    public bool Checkblackjack(Blackjackplayer player)
-    {
-        return player.Hands[0].GetHandValue() == 21;
-    }
+    public bool Checkblackjack(Blackjackplayer player) => player.Hands[0].GetHandValue() == 21;
 
     public void DealInitialCards()
     {

@@ -2,10 +2,7 @@
 
 public partial class Home : Form
 {
-    public Home()
-    {
-        InitializeComponent();
-    }
+    public Home() => InitializeComponent();
     bool _blackjack = false;
     bool _poker = false;
     private void Blackjack_Click(object sender, EventArgs e)

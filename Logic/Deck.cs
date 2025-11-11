@@ -26,7 +26,16 @@ public class Deck
             (CardsAll[j], CardsAll[i]) = (CardsAll[i], CardsAll[j]);
         }
     }
-    public void Deal(Player player)
+
+    public void DealCard(Player player)
+    {
+        if (player.IsDealer)
+            HandleDealer(player);
+        else
+            HandlePlayer(player);
+    }
+
+    private void HandleDealer(Player player)
     {
         if (CardsAll.Count < 15)
         {
@@ -41,7 +50,7 @@ public class Deck
         CardsAll.RemoveAt(0);
     }
 
-    public void DealBlackjack(Player player)
+    private void HandlePlayer(Player player)
     {
         if (CardsAll.Count < 15)
         {

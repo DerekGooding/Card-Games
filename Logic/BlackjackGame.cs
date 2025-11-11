@@ -68,7 +68,6 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, Player deale
                 }
                 else
                 {
-                    //player loses bet
                     player.Hands[i].Bet = 0;
                     MessageBox.Show($"{player.Name} lost against the dealer and lost their bet.");
                 }
@@ -87,32 +86,27 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, Player deale
         }
 
     }
-    //public bool Checkblackjack(Blackjackplayer player) => player.Hands[0].GetHandValue() == 21;
 
     public void DealInitialCards()
     {
         foreach (var player in Players)
         {
-
-            GameDeck.DealBlackjack(player);
-            GameDeck.DealBlackjack(player);
-
-
+            GameDeck.DealCard(player);
+            GameDeck.DealCard(player);
         }
     }
     public void DealDealerCards()
-
     {
         var newHand = new Hand([], 0);
         Dealer.Hands.Add(newHand);
-        GameDeck.Deal(Dealer);
-        GameDeck.Deal(Dealer);
+        GameDeck.DealCard(Dealer);
+        GameDeck.DealCard(Dealer);
     }
     public void DealerPlay()
     {
         while (Dealer.Hands[0].GetHandValue() < 17)
         {
-            GameDeck.Deal(Dealer);
+            GameDeck.DealCard(Dealer);
         }
     }
     public void Split()
@@ -130,9 +124,9 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, Player deale
             player.Balance -= player.Hands[player.CurrentHandIndex].Bet; //deduct bet for new hand
             player.Hands.Add(newHand);
 
-            GameDeck.DealBlackjack(player);
+            GameDeck.DealCard(player);
             player.CurrentHandIndex++; //have to do this as the deal functions only affects current hand
-            GameDeck.DealBlackjack(player);
+            GameDeck.DealCard(player);
             player.CurrentHandIndex--;
 
         }
@@ -140,7 +134,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, Player deale
     public void Hit()
     {
         var player = CurrentPlayer;
-        GameDeck.DealBlackjack(player);
+        GameDeck.DealCard(player);
         if (player.Hands[player.CurrentHandIndex].GetHandValue() > 21)
         {
             Dealer.Balance += player.Hands[player.CurrentHandIndex].Bet; //fix
@@ -167,7 +161,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, Player deale
             player.Hands[player.CurrentHandIndex].Bet *= 2;
             player.Balance -= player.Hands[player.CurrentHandIndex].Bet / 2;
 
-            GameDeck.DealBlackjack(player);
+            GameDeck.DealCard(player);
             if (player.Hands[player.CurrentHandIndex].GetHandValue() > 21)
             {
                 Dealer.Balance += player.Hands[player.CurrentHandIndex].Bet;

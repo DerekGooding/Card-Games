@@ -2,10 +2,24 @@
 
 namespace Poker.Logic;
 
-public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDealer dealer) : Game(players, numberOfDecks)
+public class BlackjackGame
 {
+    public int CurrentPlayer { get; set; }
+    public List<Player> Players { get; set; } = [];
+    public Deck GameDeck { get; set; }
+    public int NumberOfDecks { get; set; }
     public List<Blackjackplayer> Broke { get; set; } = [];
-    public BlackjackDealer Dealer { get; set; } = dealer;
+    public BlackjackDealer Dealer { get; set; }
+
+    public BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDealer dealer)
+    {
+        Dealer = dealer;
+        Players = players;
+        NumberOfDecks = numberOfDecks;
+        GameDeck = new Deck(numberOfDecks);
+        GameDeck.Shuffle();
+        CurrentPlayer = 0;
+    }
 
     public void Start1()
     {

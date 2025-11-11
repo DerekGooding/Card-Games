@@ -1,12 +1,11 @@
-﻿namespace Poker;
+﻿using Poker.Model;
+
+namespace Poker.Logic;
 
 public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDealer dealer) : Game(players, numberOfDecks)
 {
     public List<Blackjackplayer> Broke { get; set; } = [];
-    //create a secondary list of players that are not busted or have blackjack
     public BlackjackDealer Dealer { get; set; } = dealer;
-
-    //have to add function for starting a new round, dealer logic, busting, payout 
 
     public void Start1()
     {
@@ -24,10 +23,10 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
 
         CurrentPlayer = 0;
     }
-    public void Start2() => DealInitialCards();//foreach (var player in Players)//{//    if (checkblackjack(player as Blackjackplayer))//    {//        player.Balance += player.Hands[player.currentHand].bet * 2.5f;//fix//        player.Hands[player.currentHand].bet = 0;//        currentPlayer++;//    }//}
-
+    public void Start2() => DealInitialCards();
     public bool IsRoundOver() => CurrentPlayer >= Players.Count;
-    public void ResolveRound()//ne vodi svaki korak do resetovanja igre pa zbaga
+
+    public void ResolveRound()
     {
         DealerPlay();
         var dealerValue = Dealer.Hands[0].GetHandValue();
@@ -68,10 +67,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
                     MessageBox.Show($"{player.Name} lost against the dealer and lost their bet.");
                 }
                 if (player.Balance <= 0)
-                {
                     Broke.Add(blackjackplayer);
-
-                }
             }
             foreach (var hand in player.Hands)
             {
@@ -118,12 +114,12 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
         if (Players[CurrentPlayer] is not Blackjackplayer player)
             return;
         var handNum = player.CurrentHand;
-        if ((player.Hands[handNum].Cards.Count == 2) && (player.Hands[handNum].Cards[0].Rank == player.Hands[handNum].Cards[1].Rank))
+        if (player.Hands[handNum].Cards.Count == 2 && player.Hands[handNum].Cards[0].Rank == player.Hands[handNum].Cards[1].Rank)
         {
 
             var temp = player.Hands[handNum].Cards[1];
             player.Hands[handNum].Cards.RemoveAt(1);
-            List<Cards> temp2 = [temp]; //hopefully this works
+            List<Card> temp2 = [temp]; //hopefully this works
             //umesto add pozvati constructor
             var newHand = new Player.Hand(temp2, player.Hands[player.CurrentHand].Bet);
             player.Balance -= player.Hands[player.CurrentHand].Bet; //deduct bet for new hand
@@ -147,15 +143,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
             player.Hands[player.CurrentHand].Bet = 0;
             player.CurrentHand++;
             if (player.IsDone())
-            {
                 CurrentPlayer++;
-                //if (isRoundOver())
-                //{
-                //    resolveRound();
-
-                //}
-
-            }
 
         }
     }
@@ -165,14 +153,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
             return;
         player.CurrentHand++;
         if (player.IsDone())
-        {
             CurrentPlayer++;
-            //if (isRoundOver())
-            //{
-            //    resolveRound();
-            //}
-
-        }
         // player.currentHand--;
     }
     public void DoubleDown()
@@ -191,9 +172,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
                 player.Hands[player.CurrentHand].Bet = 0;
                 player.CurrentHand++;
                 if (player.IsDone())//check for error
-                {
                     CurrentPlayer++;
-                }
             }
             else
             {

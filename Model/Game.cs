@@ -1,4 +1,4 @@
-﻿namespace Poker;
+﻿namespace Poker.Model;
 
 public class Game
 {

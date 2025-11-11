@@ -1,14 +1,18 @@
-﻿namespace Poker;
+﻿using Poker.Logic;
+
+namespace Poker.Model;
 
 public class Player(string name, float balance)
 {
+    public List<Hand> Hands { get; set; } = [];
+    public int CurrentHand { get; set; }
     public string Name { get; set; } = name;
     public float Balance { get; set; } = balance;
-
     public List<float> Bets { get; set; } = [];
-    public class Hand(List<Cards> karte, float bet)
+
+    public class Hand(List<Card> karte, float bet)
     {
-        public List<Cards> Cards { get; set; } = karte;
+        public List<Card> Cards { get; set; } = karte;
         public float Bet { get; set; } = bet;
         public int GetHandValue(bool isAceHigh = true)
         {
@@ -37,16 +41,14 @@ public class Player(string name, float balance)
         }
     }
 
-    public List<Hand> Hands { get; set; } = [];
-    public int CurrentHand { get; set; } = 0;
-    public bool IsDone() => CurrentHand >= Hands.Count;//ne radi????
+    public bool IsDone() => CurrentHand >= Hands.Count;
+
     public void PlaceBet(float amount)
     {
         if (amount <= Balance)
         {
             Hands[CurrentHand].Bet = amount;
             Balance -= amount;
-
         }
         else
         {

@@ -1,9 +1,11 @@
-﻿namespace Poker;
+﻿using Poker.Logic;
+
+namespace Poker.Model;
 
 public class Deck
 {
     public int NumberOfDecks { get; set; }
-    public List<Cards> CardsAll { get; set; } = [];
+    public List<Card> CardsAll { get; set; } = [];
     public Deck(int numberOfDecks)
     {
         string[] ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
@@ -15,12 +17,12 @@ public class Deck
             {
                 foreach (var suit in suits)
                 {
-                    CardsAll.Add(new Cards(rank, suit));
+                    CardsAll.Add(new Card(rank, suit));
                 }
             }
         }
     }
-    public List<Cards> UsedCards { get; set; } = [];
+    public List<Card> UsedCards { get; set; } = [];
     public void Shuffle()
     {
         var rand = new Random();
@@ -68,7 +70,6 @@ public class Deck
                 UsedCards.Add(player.Hands[player.CurrentHand].Cards[i]);
             }
             player.Hands[player.CurrentHand].Cards.Clear();
-            return;
         }
         else
         {

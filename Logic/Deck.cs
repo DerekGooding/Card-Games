@@ -1,6 +1,6 @@
-﻿using Poker.Logic;
+﻿using Poker.Model;
 
-namespace Poker.Model;
+namespace Poker.Logic;
 
 public class Deck
 {

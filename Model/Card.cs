@@ -1,4 +1,4 @@
-﻿namespace Poker.Logic;
+﻿namespace Poker.Model;
 
 public readonly record struct Card(string Rank, string Suit)
 {

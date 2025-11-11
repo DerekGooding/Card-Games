@@ -10,13 +10,13 @@ public partial class Form1 : Form
     List<Panel> playerpanels = new List<Panel>();
     private Image GetCardImage(Cards card)
     {
-        
+
         string imageName = $"{card.Rank}{card.CardSuit}.png";
-        return Image.FromFile($"E:\\projekti\\Poker\\Resources\\{imageName}"); 
+        return Image.FromFile($"E:\\projekti\\Poker\\Resources\\{imageName}");
     }
     private void checkIfRoundOver()//premestiti ovu funkciju, naci joj advekvatno mesto.
     {
-        
+
         if (game.isRoundOver())
         {
             game.resolveRound();
@@ -51,7 +51,7 @@ public partial class Form1 : Form
             balance.Text = "Balance: " + game.Players[game.currentPlayer].Balance.ToString();
             game.Players[game.currentPlayer].currentHand++;
             game.currentPlayer++;
-            
+
         }
         else
         {
@@ -107,18 +107,16 @@ public partial class Form1 : Form
         }
         BlackjackDealer dealer = new BlackjackDealer();
         game = new BlackjackGame(players, 6, dealer);
-        
+
 
     }
     private int currentBettingPlayer = 0;
 
-    
     private void Stand_Click(object sender, EventArgs e)
     {
         game.Stand();
         UpdatePlayerPanels();
-        
-        
+
     }
 
     private void Hit_Click(object sender, EventArgs e)
@@ -148,18 +146,17 @@ public partial class Form1 : Form
     private void betting_button_Click(object sender, EventArgs e)
     {
         float bet = bet_amount.Value;
-        
-        
+
 
         game.Players[currentBettingPlayer].PlaceBet(bet);
-        
+
         currentBettingPlayer++;
         if (currentBettingPlayer >= game.Players.Count)
         {
             this.betting_button.Hide();
             this.bet_amount.Hide();
             this.bet_show.Hide();
-            
+
             this.Hit.Show();
             this.Stand.Show();
             this.DoubleDown.Show();
@@ -168,15 +165,15 @@ public partial class Form1 : Form
             game.start2();
             currentBettingPlayer = 0;
             UpdatePlayerPanels();
-            
+
         }
-        
+
     }
 
     private void bet_amount_Scroll(object sender, EventArgs e)
     {
         this.bet_show.Text = bet_amount.Value.ToString();
-        
+
     }
 
     private void Start_Click(object sender, EventArgs e)
@@ -184,8 +181,7 @@ public partial class Form1 : Form
         game.start1();
         this.betting_button.Show();
         game.currentPlayer = 0;
-        
-        
+
 
         this.Start.Hide();
     }

@@ -4,7 +4,7 @@ public class Player
 {
     public string Name { get; set; }
     public float Balance { get; set; }
-    
+
     public List<float> Bets { get; set; } = new List<float>();
     public class Hand
     {
@@ -176,7 +176,7 @@ public class Deck
             }
             player.Hands.Clear();
         }
-            
+
     }
 }
 
@@ -194,7 +194,7 @@ public class Game
         GameDeck.Shuffle();
         currentPlayer = 0;
     }
-    
+
 }
 public class BlackjackGame : Game
 {
@@ -207,7 +207,7 @@ public class BlackjackGame : Game
         this.dealer = dealer;
     }
     //have to add function for starting a new round, dealer logic, busting, payout 
-    
+
     public void start1()
     {
         currentPlayer = 0;
@@ -237,7 +237,7 @@ public class BlackjackGame : Game
         //    }
         //}
     }
-    
+
     public bool isRoundOver()
     {
         return currentPlayer >= Players.Count;
@@ -283,21 +283,20 @@ public class BlackjackGame : Game
                 if (player.Balance <= 0)
                 {
                     broke.Add(player as Blackjackplayer);
-                   
+
                 }
             }
             foreach(var hand in player.Hands)
             {
                 hand.bet = 0;
             }
-           
+
         }
         foreach(var player in broke)
         {
             Players.Remove(player);
         }
-       
-        
+
     }
     public bool checkblackjack(Blackjackplayer player)
     {
@@ -310,18 +309,15 @@ public class BlackjackGame : Game
             return false;
         }
     }
-    
-  
+
     public void DealInitialCards()
     {
         foreach (var player in Players)
         {
-            
-            
+
             GameDeck.DealBlackjack(player);
             GameDeck.DealBlackjack(player);
-            
-            
+
 
         }
     }
@@ -354,12 +350,12 @@ public class BlackjackGame : Game
             Player.Hand newHand = new Player.Hand(temp2, player.Hands[player.currentHand].bet);
             player.Balance -= player.Hands[player.currentHand].bet; //deduct bet for new hand
             player.Hands.Add(newHand);
-            
+
             GameDeck.DealBlackjack(player);
             player.currentHand++; //have to do this as the deal functions only affects current hand
             GameDeck.DealBlackjack(player);
             player.currentHand--;
-            
+
         }
     }
     public void Hit()
@@ -377,9 +373,9 @@ public class BlackjackGame : Game
                 //if (isRoundOver())
                 //{
                 //    resolveRound();
-                    
+
                 //}
-                
+
             }
 
         }
@@ -395,7 +391,7 @@ public class BlackjackGame : Game
             //{
             //    resolveRound();
             //}
-            
+
         }
        // player.currentHand--;
     }
@@ -406,7 +402,7 @@ public class BlackjackGame : Game
         {
             player.Hands[player.currentHand].bet *= 2;
             player.Balance -= player.Hands[player.currentHand].bet/2;
-            
+
             GameDeck.DealBlackjack(player);
             if (player.Hands[player.currentHand].getHandValue()>21)
             {
@@ -422,7 +418,7 @@ public class BlackjackGame : Game
             {
                 Stand();
             }
-                
+
         }
         else
         {
@@ -431,7 +427,7 @@ public class BlackjackGame : Game
 
     }
 }
-public class Pokerplayer 
+public class Pokerplayer
 {
 
 
@@ -444,7 +440,6 @@ public class Blackjackplayer : Player
 
     }
 
-    
 
 }
 public class BlackjackDealer : Blackjackplayer
@@ -452,7 +447,7 @@ public class BlackjackDealer : Blackjackplayer
     public BlackjackDealer() : base("Dealer", 10000)
     {
     }
-        
+
 
 
 }

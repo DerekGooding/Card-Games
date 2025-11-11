@@ -124,7 +124,7 @@
 
         private System.Windows.Forms.Button Poker;
         private System.Windows.Forms.Button Blackjack;
-        private System.Windows.Forms.TextBox Name;
+        private new System.Windows.Forms.TextBox Name;
         private System.Windows.Forms.TextBox Balance;
         private System.Windows.Forms.Button addplayer;
         private System.Windows.Forms.TextBox textBox1;

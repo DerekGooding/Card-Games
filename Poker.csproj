@@ -5,6 +5,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWindowsForms>true</UseWindowsForms>
+		<Title>Poker</Title>
+		<NeutralLanguage>en</NeutralLanguage>
 	</PropertyGroup>
 
   <ItemGroup>

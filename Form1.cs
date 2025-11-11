@@ -7,8 +7,8 @@ public partial class Form1 : Form
     public List<int> Balances = [];
     public List<Player> players = [];
     public BlackjackGame game;
-    List<Panel> _playerpanels = [];
-    private Image GetCardImage(Cards card)
+    readonly List<Panel> _playerpanels = [];
+    private static Image GetCardImage(Cards card)
     {
 
         var imageName = $"{card.Rank}{card.CardSuit}.png";

@@ -20,7 +20,7 @@ public partial class Home : Form
             MessageBox.Show("Please enter a name and balance");
             return;
         }
-        if (!int.TryParse(Balance.Text, out var n) || Convert.ToInt32(Balance.Text) < 0)
+        if (!int.TryParse(Balance.Text, out var n) || n < 0)
         {
             MessageBox.Show("Please enter a valid balance");
             return;

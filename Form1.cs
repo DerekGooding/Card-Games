@@ -23,10 +23,12 @@ public partial class Form1 : Form
             dilerKarte.Controls.Clear();
             foreach (var card in game.Dealer.Hands[0].Cards)
             {
-                PictureBox cardPicture = new PictureBox();
-                cardPicture.Image = GetCardImage(card);
-                cardPicture.Size = new Size(80, 120);
-                cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+                PictureBox cardPicture = new PictureBox
+                {
+                    Image = GetCardImage(card),
+                    Size = new Size(80, 120),
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
                 dilerKarte.Controls.Add(cardPicture);
             }
             MessageBox.Show("Round over. Starting new round.");
@@ -62,26 +64,32 @@ public partial class Form1 : Form
         ruke.Controls.Clear();
         foreach (var ruka in game.Players[0].Hands)
         {
-              FlowLayoutPanel ruka1 = new FlowLayoutPanel();
-            ruka1.AutoSize = true;
-            ruka1.BackColor = Color.Transparent;
+            FlowLayoutPanel ruka1 = new FlowLayoutPanel
+            {
+                AutoSize = true,
+                BackColor = Color.Transparent
+            };
             ruke.Controls.Add(ruka1);
               foreach(var card in ruka.Cards)
               {
-                  PictureBox cardPicture = new PictureBox();
-                 cardPicture.Size = new Size(80, 120);
-                cardPicture.Image = GetCardImage(card);
-                  cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
-                  ruka1.Controls.Add(cardPicture);
+                PictureBox cardPicture = new PictureBox
+                {
+                    Size = new Size(80, 120),
+                    Image = GetCardImage(card),
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+                ruka1.Controls.Add(cardPicture);
               }
         }
         dilerKarte.Controls.Clear();
         foreach (var card in game.Dealer.Hands[0].Cards)
         {
-            PictureBox cardPicture = new PictureBox();
-            cardPicture.Image = GetCardImage(card);
-            cardPicture.Size = new Size(80, 120);
-            cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+            PictureBox cardPicture = new PictureBox
+            {
+                Image = GetCardImage(card),
+                Size = new Size(80, 120),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
             dilerKarte.Controls.Add(cardPicture);
         }
         CheckIfRoundOver();

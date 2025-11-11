@@ -4,22 +4,10 @@ public class Hand(List<Card> karte, float bet)
 {
     public List<Card> Cards { get; set; } = karte;
     public float Bet { get; set; } = bet;
-    public int GetHandValue(bool isAceHigh = true)
+    public int GetHandValue()
     {
-        var totalValue = 0;
-        var aceCount = 0;
-        foreach (var card in Cards)
-        {
-            if (card.Rank == "A")
-            {
-                aceCount++;
-                totalValue += 11;
-            }
-            else
-            {
-                totalValue += CardValue(card, isAceHigh);
-            }
-        }
+        var totalValue = Cards.Sum(CardValue);
+        var aceCount = Cards.Count(x => x.Rank == "A");
 
         while (totalValue > 21 && aceCount > 0)
         {
@@ -29,9 +17,9 @@ public class Hand(List<Card> karte, float bet)
         return totalValue;
     }
 
-    private static int CardValue(Card card, bool isAceHigh) => card.Rank switch
+    private static int CardValue(Card card) => card.Rank switch
     {
-        "A" => isAceHigh ? 11 : 1,
+        "A" => 11,
         "K" or "Q" or "J" => 10,
         _ => int.Parse(card.Rank)
     };

@@ -1,20 +1,15 @@
 ﻿namespace Poker;
 
-public class Player
+public class Player(string name, float balance)
 {
-    public string Name { get; set; }
-    public float Balance { get; set; }
+    public string Name { get; set; } = name;
+    public float Balance { get; set; } = balance;
 
     public List<float> Bets { get; set; } = new List<float>();
-    public class Hand
+    public class Hand(List<Cards> karte, float bet)
     {
-        public Hand(List<Cards> karte, float bet)
-        {
-            this.Cards = karte;
-            this.bet = bet;
-        }
-        public List<Cards> Cards { get; set; } = new List<Cards>();
-        public float bet { get; set; } = 0;
+        public List<Cards> Cards { get; set; } = karte;
+        public float bet { get; set; } = bet;
         public int getHandValue(bool isAceHigh = true)
         {
             int totalValue = 0;
@@ -41,11 +36,7 @@ public class Player
             return totalValue;
         }
     }
-    public Player(string name, float balance)
-    {
-        this.Name = name;
-        this.Balance = balance;
-    }
+
     public List<Hand> Hands { get; set; } = new List<Hand>();
     public int currentHand { get; set; } = 0;
     public bool IsDone()
@@ -67,22 +58,18 @@ public class Player
     }
 }
 
-public class Cards
+public class Cards(string cardRank, string cardSuit)
 {
-    public string Rank { get; set; }
-    public string CardSuit { get; set; }
-    public Cards(string cardRank, string cardSuit)
-    {
-        this.Rank = cardRank;
-        this.CardSuit = cardSuit;
-    }
+    public string Rank { get; set; } = cardRank;
+    public string CardSuit { get; set; } = cardSuit;
+
     public int Value(bool isAceHigh)
     {
         if (Rank == "A")
         {
             return isAceHigh ? 11 : 1;
         }
-        else if (Rank == "K" || Rank == "Q" || Rank == "J")
+        else if (Rank is "K" or "Q" or "J")
         {
             return 10;
         }
@@ -196,16 +183,13 @@ public class Game
     }
 
 }
-public class BlackjackGame : Game
+public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDealer dealer) : Game(players, numberOfDecks)
 {
 
     public List<Blackjackplayer> broke { get; set; } = new List<Blackjackplayer>();
     //create a secondary list of players that are not busted or have blackjack
-    public BlackjackDealer dealer { get; set; }
-    public BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDealer dealer) : base(players, numberOfDecks)
-    {
-        this.dealer = dealer;
-    }
+    public BlackjackDealer dealer { get; set; } = dealer;
+
     //have to add function for starting a new round, dealer logic, busting, payout 
 
     public void start1()
@@ -433,14 +417,8 @@ public class Pokerplayer
 
 
 }
-public class Blackjackplayer : Player
+public class Blackjackplayer(string name, float balance) : Player(name, balance)
 {
-    public Blackjackplayer(string name, float balance) : base(name, balance)
-    {
-
-    }
-
-
 }
 public class BlackjackDealer : Blackjackplayer
 {

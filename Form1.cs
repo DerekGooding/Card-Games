@@ -7,21 +7,18 @@ namespace Poker;
 public partial class Form1 : Form
 {
     private readonly BlackjackGame _game;
-    private readonly List<Panel> _playerpanels = [];
-    private int _currentBettingPlayer;
+    private int _bettingPlayerIndex;
+    private Player CurrentBettingPlayer => _game.Players[_bettingPlayerIndex];
 
-    public Form1(List<string> names, List<int> balances)
+    public Form1(List<PlayerData> datas)
     {
         InitializeComponent();
         HideButtons();
-        List<Player> players = [];
-        for (var i = 0; i < names.Count; i++)
-        {
-            var player = new Player(names[i], balances[i]);
-            players.Add(player);
-        }
-        _game = new BlackjackGame(players, 6, new Dealer());
+
+        _game = new BlackjackGame(datas.ConvertAll(ToPlayer), 6, new Dealer());
     }
+
+    private Player ToPlayer(PlayerData data) => new(data);
 
     private void CheckIfRoundOver()
     {
@@ -115,14 +112,12 @@ public partial class Form1 : Form
     {
         _game.Stand();
         UpdatePlayerPanels();
-
     }
 
     private void Hit_Click(object sender, EventArgs e)
     {
         _game.Hit();
         UpdatePlayerPanels();
-
     }
 
     private void DoubleDown_Click(object sender, EventArgs e)
@@ -143,11 +138,10 @@ public partial class Form1 : Form
     {
         float bet = bet_amount.Value;
 
+        CurrentBettingPlayer.PlaceBet(bet);
+        _bettingPlayerIndex++;
 
-        _game.Players[_currentBettingPlayer].PlaceBet(bet);
-
-        _currentBettingPlayer++;
-        if (_currentBettingPlayer >= _game.Players.Count)
+        if (_bettingPlayerIndex >= _game.Players.Count)
         {
             betting_button.Hide();
             bet_amount.Hide();
@@ -158,11 +152,9 @@ public partial class Form1 : Form
             DoubleDown.Show();
             Split.Show();
             _game.StartAdditional();
-            _currentBettingPlayer = 0;
+            _bettingPlayerIndex = 0;
             UpdatePlayerPanels();
-
         }
-
     }
 
     private void Bet_amount_Scroll(object sender, EventArgs e) => bet_show.Text = bet_amount.Value.ToString();
@@ -172,7 +164,6 @@ public partial class Form1 : Form
         _game.StartInitial();
         betting_button.Show();
         _game.CurrentPlayerIndex = 0;
-
 
         Start.Hide();
     }

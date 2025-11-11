@@ -1,17 +1,12 @@
-﻿namespace Poker;
+﻿using Poker.Model;
+
+namespace Poker;
 
 public partial class Home : Form
 {
+    private readonly List<PlayerData> _playerDatas = [];
+
     public Home() => InitializeComponent();
-    bool _blackjack = false;
-    bool _poker = false;
-    private void Blackjack_Click(object sender, EventArgs e)
-    {
-        _poker = false;
-        _blackjack = true;
-    }
-    public List<string> listnames = [];
-    public List<int> listbalances = [];
 
     private void Addplayer_Click(object sender, EventArgs e)
     {
@@ -25,25 +20,24 @@ public partial class Home : Form
             MessageBox.Show("Please enter a valid balance");
             return;
         }
-        if (listnames.Contains(Name.Text))
+        if (_playerDatas.Any(x => x.Name == Name.Text))
         {
             MessageBox.Show("Player already exists");
             return;
         }
-        if (listnames.Count >= 7)
+        if (_playerDatas.Count >= 7)
         {
             MessageBox.Show("Maximum number of players reached");
             return;
         }
-        listnames.Add(Name.Text);
-        listbalances.Add(Convert.ToInt32(Balance.Text));
+        _playerDatas.Add(new(Name.Text, n));
         Name.Clear();
         Balance.Clear();
     }
 
     private void Start_Click(object sender, EventArgs e)
     {
-        var form1 = new Form1(listnames, listbalances);
+        var form1 = new Form1(_playerDatas);
         form1.Show();
         Hide();
     }

@@ -37,25 +37,6 @@
             this.start = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Poker
-            // 
-            this.Poker.Location = new System.Drawing.Point(133, 88);
-            this.Poker.Name = "Poker";
-            this.Poker.Size = new System.Drawing.Size(75, 23);
-            this.Poker.TabIndex = 0;
-            this.Poker.Text = "button1";
-            this.Poker.UseVisualStyleBackColor = true;
-            // 
-            // Blackjack
-            // 
-            this.Blackjack.Location = new System.Drawing.Point(499, 88);
-            this.Blackjack.Name = "Blackjack";
-            this.Blackjack.Size = new System.Drawing.Size(75, 23);
-            this.Blackjack.TabIndex = 1;
-            this.Blackjack.Text = "Blackjack";
-            this.Blackjack.UseVisualStyleBackColor = true;
-            this.Blackjack.Click += new System.EventHandler(this.Blackjack_Click);
-            // 
             // Name
             // 
             this.Name.Location = new System.Drawing.Point(324, 176);

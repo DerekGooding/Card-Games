@@ -18,7 +18,7 @@ public partial class Home : Form
 
     private void Addplayer_Click(object sender, EventArgs e)
     {
-        if (Name.Text == "" || Balance.Text == "")
+        if (Name.Text.Length == 0 || Balance.Text.Length == 0)
         {
             MessageBox.Show("Please enter a name and balance");
             return;

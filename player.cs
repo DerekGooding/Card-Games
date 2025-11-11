@@ -96,9 +96,7 @@ public class Deck
         for (var i = CardsAll.Count - 1; i > 0; i--)
         {
             var j = rand.Next(0, i + 1);
-            var temp = CardsAll[i];
-            CardsAll[i] = CardsAll[j];
-            CardsAll[j] = temp;
+            (CardsAll[j], CardsAll[i]) = (CardsAll[i], CardsAll[j]);
         }
     }
     public void Deal(Player player)

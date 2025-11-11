@@ -5,7 +5,7 @@ public class Player(string name, float balance)
     public string Name { get; set; } = name;
     public float Balance { get; set; } = balance;
 
-    public List<float> Bets { get; set; } = new List<float>();
+    public List<float> Bets { get; set; } = [];
     public class Hand(List<Cards> karte, float bet)
     {
         public List<Cards> Cards { get; set; } = karte;
@@ -37,7 +37,7 @@ public class Player(string name, float balance)
         }
     }
 
-    public List<Hand> Hands { get; set; } = new List<Hand>();
+    public List<Hand> Hands { get; set; } = [];
     public int currentHand { get; set; } = 0;
     public bool IsDone()
     {
@@ -72,11 +72,11 @@ public class Cards(string cardRank, string cardSuit)
 public class Deck
 {
     public int numberOfDecks { get; set; }
-    public List<Cards> CardsAll { get; set; } = new List<Cards>();
+    public List<Cards> CardsAll { get; set; } = [];
     public Deck(int numberOfDecks)
     {
-        string[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-        string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
+        string[] ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+        string[] suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
         this.numberOfDecks = numberOfDecks;
         for (int i = 0; i< numberOfDecks; i++)
         {
@@ -89,7 +89,7 @@ public class Deck
             }
         }
     }
-    public List<Cards> UsedCards { get; set; } = new List<Cards>();
+    public List<Cards> UsedCards { get; set; } = [];
     public void Shuffle()
     {
         Random rand = new Random();
@@ -159,7 +159,7 @@ public class Deck
 public class Game
 {
     public int currentPlayer { get; set; } = 0;
-    public List<Player> Players { get; set; } = new List<Player>();
+    public List<Player> Players { get; set; } = [];
     public Deck GameDeck { get; set; }
     public int NumberOfDecks { get; set; }
     public Game(List<Player> players, int numberOfDecks)
@@ -175,7 +175,7 @@ public class Game
 public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDealer dealer) : Game(players, numberOfDecks)
 {
 
-    public List<Blackjackplayer> broke { get; set; } = new List<Blackjackplayer>();
+    public List<Blackjackplayer> broke { get; set; } = [];
     //create a secondary list of players that are not busted or have blackjack
     public BlackjackDealer dealer { get; set; } = dealer;
 
@@ -188,7 +188,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
         {
             GameDeck.clearPlayer(player);
             player.currentHand = 0;
-            Player.Hand newHand = new Player.Hand(new List<Cards>(), 0);
+            Player.Hand newHand = new Player.Hand([], 0);
             player.Hands.Add(newHand);
         }
         GameDeck.Shuffle();
@@ -290,7 +290,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
     public void DealDealerCards()
 
     {
-        Player.Hand newHand = new Player.Hand(new List<Cards>(), 0);
+        Player.Hand newHand = new Player.Hand([], 0);
         dealer.Hands.Add(newHand);
         GameDeck.Deal(dealer);
         GameDeck.Deal(dealer);
@@ -311,7 +311,7 @@ public class BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDea
 
             Cards temp = player.Hands[handNum].Cards[1];
             player.Hands[handNum].Cards.RemoveAt(1);
-            List<Cards> temp2 = new List<Cards> { temp }; //hopefully this works
+            List<Cards> temp2 = [temp]; //hopefully this works
             //umesto add pozvati constructor
             Player.Hand newHand = new Player.Hand(temp2, player.Hands[player.currentHand].bet);
             player.Balance -= player.Hands[player.currentHand].bet; //deduct bet for new hand

@@ -3,11 +3,11 @@
 //add counter to all actions to know when to reset game
 public partial class Form1 : Form
 {
-    public List<string> Names = new List<string>();
-    public List<int> Balances = new List<int>();
-    public List<Player> players = new List<Player>();
+    public List<string> Names = [];
+    public List<int> Balances = [];
+    public List<Player> players = [];
     public BlackjackGame game;
-    List<Panel> playerpanels = new List<Panel>();
+    List<Panel> playerpanels = [];
     private Image GetCardImage(Cards card)
     {
 

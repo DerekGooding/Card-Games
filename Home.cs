@@ -13,8 +13,8 @@ public partial class Home : Form
         poker = false;
         blackjack = true;
     }
-    public List<string> listnames = new List<string>();
-    public List<int> listbalances = new List<int>();
+    public List<string> listnames = [];
+    public List<int> listbalances = [];
 
     private void addplayer_Click(object sender, EventArgs e)
     {

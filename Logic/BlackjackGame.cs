@@ -28,7 +28,7 @@ public class BlackjackGame
         {
             GameDeck.ClearPlayer(player);
             player.CurrentHand = 0;
-            var newHand = new Player.Hand([], 0);
+            var newHand = new Hand([], 0);
             player.Hands.Add(newHand);
         }
         GameDeck.Shuffle();
@@ -111,7 +111,7 @@ public class BlackjackGame
     public void DealDealerCards()
 
     {
-        var newHand = new Player.Hand([], 0);
+        var newHand = new Hand([], 0);
         Dealer.Hands.Add(newHand);
         GameDeck.Deal(Dealer);
         GameDeck.Deal(Dealer);
@@ -135,7 +135,7 @@ public class BlackjackGame
             player.Hands[handNum].Cards.RemoveAt(1);
             List<Card> temp2 = [temp]; //hopefully this works
             //umesto add pozvati constructor
-            var newHand = new Player.Hand(temp2, player.Hands[player.CurrentHand].Bet);
+            var newHand = new Hand(temp2, player.Hands[player.CurrentHand].Bet);
             player.Balance -= player.Hands[player.CurrentHand].Bet; //deduct bet for new hand
             player.Hands.Add(newHand);
 

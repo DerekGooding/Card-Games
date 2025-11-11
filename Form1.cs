@@ -21,10 +21,10 @@ public partial class Form1 : Form
         _balances = balances;
         for (var i = 0; i < _names.Count; i++)
         {
-            var player = new Blackjackplayer(_names[i], _balances[i]);
+            var player = new Player(_names[i], _balances[i]);
             _players.Add(player);
         }
-        var dealer = new BlackjackDealer();
+        var dealer = new Player("Dealer", 10000) { IsDealer = true };
         _game = new BlackjackGame(_players, 6, dealer);
     }
 
@@ -57,22 +57,22 @@ public partial class Form1 : Form
     }
     private void UpdatePlayerPanels()
     {
-        if (_game.CurrentPlayer >= _game.Players.Count)
+        if (_game.CurrentPlayerIndex >= _game.Players.Count)
         {
-            _game.CurrentPlayer--;
-            _game.Players[_game.CurrentPlayer].CurrentHand--;
-            trenutniUlog.Text = "Current bet: " + _game.Players[_game.CurrentPlayer].Hands[_game.Players[_game.CurrentPlayer].CurrentHand].Bet.ToString();
-            trenutnaRuka.Text = "Current hand number: " + (_game.Players[_game.CurrentPlayer].CurrentHand + 1).ToString();
-            balance.Text = "Balance: " + _game.Players[_game.CurrentPlayer].Balance.ToString();
-            _game.Players[_game.CurrentPlayer].CurrentHand++;
-            _game.CurrentPlayer++;
+            _game.CurrentPlayerIndex--;
+            _game.Players[_game.CurrentPlayerIndex].CurrentHand--;
+            trenutniUlog.Text = "Current bet: " + _game.Players[_game.CurrentPlayerIndex].Hands[_game.Players[_game.CurrentPlayerIndex].CurrentHand].Bet.ToString();
+            trenutnaRuka.Text = "Current hand number: " + (_game.Players[_game.CurrentPlayerIndex].CurrentHand + 1).ToString();
+            balance.Text = "Balance: " + _game.Players[_game.CurrentPlayerIndex].Balance.ToString();
+            _game.Players[_game.CurrentPlayerIndex].CurrentHand++;
+            _game.CurrentPlayerIndex++;
 
         }
         else
         {
-            trenutniUlog.Text = "Current bet: " + _game.Players[_game.CurrentPlayer].Hands[_game.Players[_game.CurrentPlayer].CurrentHand].Bet.ToString();
-            trenutnaRuka.Text = "Current hand number: " + (_game.Players[_game.CurrentPlayer].CurrentHand + 1).ToString();
-            balance.Text = "Balance: " + _game.Players[_game.CurrentPlayer].Balance.ToString();
+            trenutniUlog.Text = "Current bet: " + _game.Players[_game.CurrentPlayerIndex].Hands[_game.Players[_game.CurrentPlayerIndex].CurrentHand].Bet.ToString();
+            trenutnaRuka.Text = "Current hand number: " + (_game.Players[_game.CurrentPlayerIndex].CurrentHand + 1).ToString();
+            balance.Text = "Balance: " + _game.Players[_game.CurrentPlayerIndex].Balance.ToString();
         }
         ruke.Controls.Clear();
         foreach (var ruka in _game.Players[0].Hands)
@@ -177,7 +177,7 @@ public partial class Form1 : Form
     {
         _game.Start1();
         betting_button.Show();
-        _game.CurrentPlayer = 0;
+        _game.CurrentPlayerIndex = 0;
 
 
         Start.Hide();

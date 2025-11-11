@@ -4,26 +4,29 @@ namespace Poker.Logic;
 
 public class BlackjackGame
 {
-    public int CurrentPlayer { get; set; }
+    public int CurrentPlayerIndex { get; set; }
     public List<Player> Players { get; set; } = [];
     public Deck GameDeck { get; set; }
     public int NumberOfDecks { get; set; }
-    public List<Blackjackplayer> Broke { get; set; } = [];
-    public BlackjackDealer Dealer { get; set; }
+    public List<Player> Broke { get; set; } = [];
+    public Player Dealer { get; set; }
+    private Player CurrentPlayer => Players[CurrentPlayerIndex].IsDealer
+        ? throw new Exception("Dealer cannot be current player")
+        : Players[CurrentPlayerIndex];
 
-    public BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDealer dealer)
+    public BlackjackGame(List<Player> players, int numberOfDecks, Player dealer)
     {
         Dealer = dealer;
         Players = players;
         NumberOfDecks = numberOfDecks;
         GameDeck = new Deck(numberOfDecks);
         GameDeck.Shuffle();
-        CurrentPlayer = 0;
+        CurrentPlayerIndex = 0;
     }
 
     public void Start1()
     {
-        CurrentPlayer = 0;
+        CurrentPlayerIndex = 0;
         foreach (var player in Players)
         {
             GameDeck.ClearPlayer(player);
@@ -35,10 +38,10 @@ public class BlackjackGame
         Dealer.Hands.Clear();
         DealDealerCards();
 
-        CurrentPlayer = 0;
+        CurrentPlayerIndex = 0;
     }
     public void Start2() => DealInitialCards();
-    public bool IsRoundOver() => CurrentPlayer >= Players.Count;
+    public bool IsRoundOver() => CurrentPlayerIndex >= Players.Count;
 
     public void ResolveRound()
     {
@@ -48,9 +51,9 @@ public class BlackjackGame
         {
             for (var i = 0; i < player.Hands.Count; i++)
             {
-                if (player is not Blackjackplayer blackjackplayer)
+                if (player.IsDealer)
                     continue;
-                var playerValue = blackjackplayer.Hands[i].GetHandValue();
+                var playerValue = player.Hands[i].GetHandValue();
                 if (playerValue > 21)
                 {
                     player.Hands[i].Bet = 0;
@@ -81,7 +84,7 @@ public class BlackjackGame
                     MessageBox.Show($"{player.Name} lost against the dealer and lost their bet.");
                 }
                 if (player.Balance <= 0)
-                    Broke.Add(blackjackplayer);
+                    Broke.Add(player);
             }
             foreach (var hand in player.Hands)
             {
@@ -125,8 +128,7 @@ public class BlackjackGame
     }
     public void Split()
     {
-        if (Players[CurrentPlayer] is not Blackjackplayer player)
-            return;
+        var player = CurrentPlayer;
         var handNum = player.CurrentHand;
         if (player.Hands[handNum].Cards.Count == 2 && player.Hands[handNum].Cards[0].Rank == player.Hands[handNum].Cards[1].Rank)
         {
@@ -148,8 +150,7 @@ public class BlackjackGame
     }
     public void Hit()
     {
-        if (Players[CurrentPlayer] is not Blackjackplayer player)
-            return;
+        var player = CurrentPlayer;
         GameDeck.DealBlackjack(player);
         if (player.Hands[player.CurrentHand].GetHandValue() > 21)
         {
@@ -157,23 +158,21 @@ public class BlackjackGame
             player.Hands[player.CurrentHand].Bet = 0;
             player.CurrentHand++;
             if (player.IsDone())
-                CurrentPlayer++;
+                CurrentPlayerIndex++;
 
         }
     }
     public void Stand()
     {
-        if (Players[CurrentPlayer] is not Blackjackplayer player)
-            return;
+        var player = CurrentPlayer;
         player.CurrentHand++;
         if (player.IsDone())
-            CurrentPlayer++;
+            CurrentPlayerIndex++;
         // player.currentHand--;
     }
     public void DoubleDown()
     {
-        if (Players[CurrentPlayer] is not Blackjackplayer player)
-            return;
+        var player = CurrentPlayer;
         if (player.Balance >= player.Hands[player.CurrentHand].Bet)
         {
             player.Hands[player.CurrentHand].Bet *= 2;
@@ -186,7 +185,7 @@ public class BlackjackGame
                 player.Hands[player.CurrentHand].Bet = 0;
                 player.CurrentHand++;
                 if (player.IsDone())//check for error
-                    CurrentPlayer++;
+                    CurrentPlayerIndex++;
             }
             else
             {
@@ -198,7 +197,6 @@ public class BlackjackGame
         {
             throw new Exception("Insufficient balance to double down.");
         }
-
     }
 }
 

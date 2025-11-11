@@ -2,6 +2,7 @@
 
 public class Player(string name, float balance)
 {
+    public bool IsDealer { get; set; }
     public List<Hand> Hands { get; set; } = [];
     public int CurrentHand { get; set; }
     public string Name { get; set; } = name;

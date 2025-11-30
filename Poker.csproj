@@ -119,166 +119,274 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\2Clubs.png" />
+    <Content Include="Resources\2Clubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\2Diamonds.png" />
+    <Content Include="Resources\2Diamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\2Hearts.png" />
+    <Content Include="Resources\2Hearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\2Spades.png" />
+    <Content Include="Resources\2Spades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\3Clubs.png" />
+    <Content Include="Resources\3Clubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\3Diamonds.png" />
+    <Content Include="Resources\3Diamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\3Hearts.png" />
+    <Content Include="Resources\3Hearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\3Spades.png" />
+    <Content Include="Resources\3Spades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\4Clubs.png" />
+    <Content Include="Resources\4Clubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\4Diamonds.png" />
+    <Content Include="Resources\4Diamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\4Hearts.png" />
+    <Content Include="Resources\4Hearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\4Spades.png" />
+    <Content Include="Resources\4Spades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\5Clubs.png" />
+    <Content Include="Resources\5Clubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\5Diamonds.png" />
+    <Content Include="Resources\5Diamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\5Hearts.png" />
+    <Content Include="Resources\5Hearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\5Spades.png" />
+    <Content Include="Resources\5Spades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\6Clubs.png" />
+    <Content Include="Resources\6Clubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\6Diamonds.png" />
+    <Content Include="Resources\6Diamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\6Hearts.png" />
+    <Content Include="Resources\6Hearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\6Spades.png" />
+    <Content Include="Resources\6Spades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\7Clubs.png" />
+    <Content Include="Resources\7Clubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\7Diamonds.png" />
+    <Content Include="Resources\7Diamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\7Hearts.png" />
+    <Content Include="Resources\7Hearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\7Spades.png" />
+    <Content Include="Resources\7Spades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\8Clubs.png" />
+    <Content Include="Resources\8Clubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\8Diamonds.png" />
+    <Content Include="Resources\8Diamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\8Hearts.png" />
+    <Content Include="Resources\8Hearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\8Spades.png" />
+    <Content Include="Resources\8Spades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\9Clubs.png" />
+    <Content Include="Resources\9Clubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\9Diamonds.png" />
+    <Content Include="Resources\9Diamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\9Hearts.png" />
+    <Content Include="Resources\9Hearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\9Spades.png" />
+    <Content Include="Resources\9Spades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\10Clubs.png" />
+    <Content Include="Resources\10Clubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\10Diamonds.png" />
+    <Content Include="Resources\10Diamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\10Hearts.png" />
+    <Content Include="Resources\10Hearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\10Spades.png" />
+    <Content Include="Resources\10Spades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AClubs.png" />
+    <Content Include="Resources\AClubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ADiamonds.png" />
+    <Content Include="Resources\ADiamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AHearts.png" />
+    <Content Include="Resources\AHearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ASpades.png" />
+    <Content Include="Resources\ASpades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\JClubs.png" />
+    <Content Include="Resources\JClubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\JDiamonds.png" />
+    <Content Include="Resources\JDiamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\JHearts.png" />
+    <Content Include="Resources\JHearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\JokerBlack.png" />
+    <Content Include="Resources\JokerBlack.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\JokerRed.png" />
+    <Content Include="Resources\JokerRed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\JSpades.png" />
+    <Content Include="Resources\JSpades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\KClubs.png" />
+    <Content Include="Resources\KClubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\KDiamonds.png" />
+    <Content Include="Resources\KDiamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\KHearts.png" />
+    <Content Include="Resources\KHearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\KSpades.png" />
+    <Content Include="Resources\KSpades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\QClubs.png" />
+    <Content Include="Resources\QClubs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\QDiamonds.png" />
+    <Content Include="Resources\QDiamonds.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\QHearts.png" />
+    <Content Include="Resources\QHearts.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\QSpades.png" />
+    <Content Include="Resources\QSpades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

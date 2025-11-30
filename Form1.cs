@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Poker
 {
+    
     //add counter to all actions to know when to reset game
     public partial class Form1 : Form
     {
@@ -21,9 +24,11 @@ namespace Poker
         List<Panel> playerpanels = new List<Panel>();
         private Image GetCardImage(Cards card)
         {
-            
+            string appBasePath = AppDomain.CurrentDomain.BaseDirectory;
             string imageName = $"{card.Rank}{card.CardSuit}.png";
-            return Image.FromFile($"E:\\projekti\\Poker\\Resources\\{imageName}"); 
+            string relativePath = $"Resources\\{imageName}";
+            string fullPath = Path.Combine(appBasePath, relativePath);
+            return Image.FromFile(fullPath); 
         }
         private void checkIfRoundOver()//premestiti ovu funkciju, naci joj advekvatno mesto.
         {

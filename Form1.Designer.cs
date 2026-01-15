@@ -93,7 +93,7 @@
             // 
             this.bet_amount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bet_amount.BackColor = System.Drawing.Color.Beige;
-            this.bet_amount.Location = new System.Drawing.Point(12, 24);
+            this.bet_amount.Location = new System.Drawing.Point(12, 9);
             this.bet_amount.Maximum = 1000;
             this.bet_amount.Name = "bet_amount";
             this.bet_amount.Size = new System.Drawing.Size(117, 45);
@@ -141,6 +141,7 @@
             this.Start.TabIndex = 16;
             this.Start.Text = "Start";
             this.Start.UseVisualStyleBackColor = true;
+            this.Start.Visible = false;
             this.Start.Click += new System.EventHandler(this.Start_Click);
             // 
             // dilerKarte
@@ -155,7 +156,7 @@
             // 
             this.ruke.AutoSize = true;
             this.ruke.BackColor = System.Drawing.Color.Transparent;
-            this.ruke.Location = new System.Drawing.Point(187, 350);
+            this.ruke.Location = new System.Drawing.Point(123, 335);
             this.ruke.Name = "ruke";
             this.ruke.Size = new System.Drawing.Size(908, 178);
             this.ruke.TabIndex = 17;
@@ -168,6 +169,7 @@
             this.balance.Size = new System.Drawing.Size(35, 13);
             this.balance.TabIndex = 18;
             this.balance.Text = "label1";
+            this.balance.Click += new System.EventHandler(this.balance_Click);
             // 
             // trenutnaRuka
             // 

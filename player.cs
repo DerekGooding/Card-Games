@@ -12,7 +12,6 @@ namespace Poker
         public string Name { get; set; }
         public float Balance { get; set; }
         
-        public List<float> Bets { get; set; } = new List<float>();
         public class Hand
         {
             public Hand(List<Cards> karte, float bet)
@@ -52,12 +51,12 @@ namespace Poker
         {
             this.Name = name;
             this.Balance = balance;
-        }
+        }//konstruktor
         public List<Hand> Hands { get; set; } = new List<Hand>();
         public int currentHand { get; set; } = 0;
         public bool IsDone()
         {
-            return currentHand >= Hands.Count;//ne radi????
+            return currentHand >= Hands.Count;
         }
         public void PlaceBet(float amount)
         {

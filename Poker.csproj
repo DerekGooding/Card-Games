@@ -369,6 +369,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\putincardfinal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\QClubs.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -42,25 +42,11 @@ namespace Poker
                 int temp = game.currentPlayer;
                 game.resolveRound();
                 string bal = game.Players[temp].Balance.ToString();
-                UpdatePlayerPanels(true,ch,bal);
                 dilerKarte.Controls.Clear();
-                foreach (var card in game.dealer.Hands[0].Cards)
-                {
-                    PictureBox cardPicture = new PictureBox();
-                    cardPicture.Image = GetCardImage(card);
-                    cardPicture.Size = new Size(80, 120);
-                    cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
-                    dilerKarte.Controls.Add(cardPicture);
-                }
+                UpdatePlayerPanels(true,ch,bal);
                 MessageBox.Show("Round over. Starting new round.");
                 game.start1();
-                this.betting_button.Show();
-                this.bet_amount.Show();
-                this.bet_show.Show();
-                this.Split.Hide();
-                this.Hit.Hide();
-                this.Stand.Hide();
-                this.DoubleDown.Hide();
+                showButtons();
             }
         }
         private void UpdatePlayerPanels(bool isOver,string ch, string bal)
@@ -93,6 +79,16 @@ namespace Poker
                 cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
                 dilerKarte.Controls.Add(cardPicture);
             }
+        }
+        private void showButtons()
+        {
+            this.betting_button.Show();
+            this.bet_amount.Show();
+            this.bet_show.Show();
+            this.Split.Hide();
+            this.Hit.Hide();
+            this.Stand.Hide();
+            this.DoubleDown.Hide();
         }
         private void UpdatePlayerPanels()
         {
@@ -130,14 +126,20 @@ namespace Poker
                   }
             }
             dilerKarte.Controls.Clear();
-            foreach (var card in game.dealer.Hands[0].Cards)
-            {
-                PictureBox cardPicture = new PictureBox();
-                cardPicture.Image = GetCardImage(card);
-                cardPicture.Size = new Size(80, 120);
-                cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
-                dilerKarte.Controls.Add(cardPicture);
-            }
+            
+            PictureBox dcardPicture = new PictureBox();
+            string appBasePath = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = $"Resources\\{"putincardfinal.png"}";
+            string fullPath = Path.Combine(appBasePath, relativePath);
+            dcardPicture.Image = Image.FromFile(fullPath);
+            dcardPicture.Size = new Size(80, 120);
+            dcardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+            dilerKarte.Controls.Add(dcardPicture);
+            PictureBox dcardPicture2 = new PictureBox();
+            dcardPicture2.Image = GetCardImage(game.dealer.Hands[0].Cards[1]);
+            dcardPicture2.Size = new Size(80, 120);
+            dcardPicture2.SizeMode = PictureBoxSizeMode.StretchImage;
+            dilerKarte.Controls.Add(dcardPicture2);
             checkIfRoundOver();
         }
         public void hideButtons()

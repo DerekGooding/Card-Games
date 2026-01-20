@@ -145,21 +145,8 @@ namespace Poker
             UsedCards.Add(CardsAll[0]);
             CardsAll.RemoveAt(0);
         }
-        public void DealBlackjack(Player player)
-        {
-            int handnum = player.currentHand;
-            if (CardsAll.Count < 15)
-            {
-                for (int i = 0; i < UsedCards.Count; i++)
-                {
-                    CardsAll.Add(UsedCards[i]);
-                    UsedCards.RemoveAt(i);
-                }
-            }
-            player.Hands[handnum].Cards.Add(CardsAll[0]);
-            UsedCards.Add(CardsAll[0]);
-            CardsAll.RemoveAt(0);
-        }
+        
+        
         public void clearPlayer(Player player)
         {
             if(player.Name=="Dealer")
@@ -324,8 +311,8 @@ namespace Poker
             {
                 
                 
-                GameDeck.DealBlackjack(player);
-                GameDeck.DealBlackjack(player);
+                GameDeck.Deal(player);
+                GameDeck.Deal(player);
                 
                 
 
@@ -361,9 +348,9 @@ namespace Poker
                 player.Balance -= player.Hands[player.currentHand].bet; //deduct bet for new hand
                 player.Hands.Add(newHand);
                 
-                GameDeck.DealBlackjack(player);
+                GameDeck.Deal(player);
                 player.currentHand++; //have to do this as the deal functions only affects current hand
-                GameDeck.DealBlackjack(player);
+                GameDeck.Deal(player);
                 player.currentHand--;
                 
             }
@@ -371,7 +358,7 @@ namespace Poker
         public void Hit()
         {
             Blackjackplayer player = Players[currentPlayer ] as Blackjackplayer;//nakon betting runde currentplayer je na 1 a treba da je na 0
-            GameDeck.DealBlackjack(player);
+            GameDeck.Deal(player);
             if (player.Hands[player.currentHand].getHandValue()>21)
             {
                 dealer.Balance += player.Hands[player.currentHand].bet; //fix
@@ -413,7 +400,7 @@ namespace Poker
                 player.Hands[player.currentHand].bet *= 2;
                 player.Balance -= player.Hands[player.currentHand].bet/2;
                 
-                GameDeck.DealBlackjack(player);
+                GameDeck.Deal(player);
                 if (player.Hands[player.currentHand].getHandValue()>21)
                 {
                     dealer.Balance += player.Hands[player.currentHand].bet;

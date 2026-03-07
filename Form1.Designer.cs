@@ -45,6 +45,7 @@
             this.trenutnaRuka = new System.Windows.Forms.Label();
             this.trenutniUlog = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.exit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bet_amount)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -103,6 +104,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.exit);
             this.panel1.Controls.Add(this.bet_show);
             this.panel1.Controls.Add(this.betting_button);
             this.panel1.Controls.Add(this.Hit);
@@ -193,6 +195,17 @@
             // 
             this.timer1.Interval = 2000;
             // 
+            // exit
+            // 
+            this.exit.BackColor = System.Drawing.Color.OliveDrab;
+            this.exit.Location = new System.Drawing.Point(991, 57);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(75, 23);
+            this.exit.TabIndex = 8;
+            this.exit.Text = "exit";
+            this.exit.UseVisualStyleBackColor = false;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,6 +249,7 @@
         private System.Windows.Forms.Label trenutnaRuka;
         private System.Windows.Forms.Label trenutniUlog;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button exit;
     }
 }
 

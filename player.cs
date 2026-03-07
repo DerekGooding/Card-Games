@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 //popraviti resolve da sve lepo resi
 namespace Poker
 {
+   
     public class Player
     {
         public string Name { get; set; }
-        public float Balance { get; set; }
+        public float Balance { get ; set;   }//enkapsulirano
         
         public class Hand
         {
@@ -18,9 +21,10 @@ namespace Poker
             {
                 this.Cards = karte;
                 this.bet = bet;
-            }
-            public List<Cards> Cards { get; set; } = new List<Cards>();
+            }//konstruktor
             public float bet { get; set; } = 0;
+            public List<Cards> Cards { get; set; } = new List<Cards>();
+            
             public int getHandValue(bool isAceHigh = true)
             {
                 int totalValue = 0;
@@ -130,10 +134,10 @@ namespace Poker
                 CardsAll[i] = CardsAll[j];
                 CardsAll[j] = temp;
             }
-        }
+        }//fiser yates algoritam
         public void Deal(Player player)
         {
-            if (CardsAll.Count < 15)
+            if (CardsAll.Count < 51)
             {
                 for (int i = 0; i < UsedCards.Count; i++)
                 {
@@ -149,17 +153,7 @@ namespace Poker
         
         public void clearPlayer(Player player)
         {
-            if(player.Name=="Dealer")
-            {
-                for (int i = 0; i<player.Hands[player.currentHand].Cards.Count; i++)
-                {
-                    UsedCards.Add(player.Hands[player.currentHand].Cards[i]);
-                }
-                player.Hands[player.currentHand].Cards.Clear();
-                return;
-            }
-            else
-            {
+            
                 for (int i = 0; i<player.Hands.Count; i++)
                 {
                     for (int j = 0; j<player.Hands[i].Cards.Count; j++)
@@ -168,7 +162,7 @@ namespace Poker
                     }
                 }
                 player.Hands.Clear();
-            }
+            
                 
         }
     }
@@ -187,20 +181,15 @@ namespace Poker
             GameDeck.Shuffle();
             currentPlayer = 0;
         }
-        
     }
     public class BlackjackGame : Game
     {
-
-        public List<Blackjackplayer> broke { get; set; } = new List<Blackjackplayer>();
-        //create a secondary list of players that are not busted or have blackjack
+        public List<Player> broke { get; set; } = new List<Player>();
         public BlackjackDealer dealer { get; set; }
         public BlackjackGame(List<Player> players, int numberOfDecks, BlackjackDealer dealer) : base(players, numberOfDecks)
         {
             this.dealer = dealer;
         }
-        //have to add function for starting a new round, dealer logic, busting, payout 
-        
         public void start1()
         {
             currentPlayer = 0;
@@ -217,25 +206,11 @@ namespace Poker
 
             currentPlayer = 0;
         }
-        public void start2()
-        {
-            DealInitialCards();
-            //foreach (var player in Players)
-            //{
-            //    if (checkblackjack(player as Blackjackplayer))
-            //    {
-            //        player.Balance += player.Hands[player.currentHand].bet * 2.5f;//fix
-            //        player.Hands[player.currentHand].bet = 0;
-            //        currentPlayer++;
-            //    }
-            //}
-        }
-        
         public bool isRoundOver()
         {
             return currentPlayer >= Players.Count;
         }
-        public void resolveRound()//ne vodi svaki korak do resetovanja igre pa zbaga
+        public void resolveRound()
         {
             DealerPlay();
             int dealerValue = dealer.Hands[0].getHandValue();
@@ -243,39 +218,38 @@ namespace Poker
             {
                 for(int i = 0; i< player.Hands.Count; i++)
                 {
-                    int playerValue = (player as Blackjackplayer).Hands[i].getHandValue();
+                    int playerValue = (player as Player).Hands[i].getHandValue();
                     if (playerValue > 21)
                     {
                         player.Hands[i].bet = 0;
-                        MessageBox.Show($"{player.Name} busted and lost their bet.");
+                        
                     }
                     else if (dealerValue>21)
                     {
                         player.Balance += player.Hands[i].bet*2;
                         player.Hands[i].bet = 0;
-                        MessageBox.Show($"{player.Name} won as the dealer busted and doubled their bet.");
+                        
                     }
                     else if(playerValue > dealerValue)
                     {
                         player.Balance += player.Hands[i].bet*2;
                         player.Hands[i].bet = 0;
-                        MessageBox.Show($"{player.Name} won against the dealer and doubled their bet.");
+                        
                     }
                     else if (playerValue == dealerValue)
                     {
                         player.Balance += player.Hands[i].bet;
                         player.Hands[i].bet = 0;
-                        MessageBox.Show($"{player.Name} pushed with the dealer and got their bet back.");
+                        
                     }
                     else
-                    {
-                        //player loses bet
+                    {                      
                         player.Hands[i].bet = 0;
-                        MessageBox.Show($"{player.Name} lost against the dealer and lost their bet.");
+                        
                     }
                     if (player.Balance <= 0)
                     {
-                        broke.Add(player as Blackjackplayer);
+                        broke.Add(player as Player);
                        
                     }
                 }
@@ -292,7 +266,7 @@ namespace Poker
            
             
         }
-        public bool checkblackjack(Blackjackplayer player)
+        public bool checkblackjack(Player player)
         {
             if (player.Hands[0].getHandValue() == 21)
             {
@@ -303,23 +277,17 @@ namespace Poker
                 return false;
             }
         }
+
         
-      
         public void DealInitialCards()
         {
             foreach (var player in Players)
             {
-                
-                
                 GameDeck.Deal(player);
                 GameDeck.Deal(player);
-                
-                
-
             }
         }
-        public void DealDealerCards()
-
+        public void DealDealerCards()//ovo je nepotrebno skloniti
         {
             Player.Hand newHand = new Player.Hand(new List<Cards>(), 0);
             dealer.Hands.Add(newHand);
@@ -335,15 +303,14 @@ namespace Poker
         }
         public void Split()
         {
-            Blackjackplayer player = Players[currentPlayer ] as Blackjackplayer;
+            Player player = Players[currentPlayer ] as Player;
             int handNum = player.currentHand;
             if ((player.Hands[handNum].Cards.Count== 2)&&(player.Hands[handNum].Cards[0].Rank == player.Hands[handNum].Cards[1].Rank))
             {
 
                 Cards temp = player.Hands[handNum].Cards[1];
                 player.Hands[handNum].Cards.RemoveAt(1);
-                List<Cards> temp2 = new List<Cards> { temp }; //hopefully this works
-                //umesto add pozvati constructor
+                List<Cards> temp2 = new List<Cards> { temp }; 
                 Player.Hand newHand = new Player.Hand(temp2, player.Hands[player.currentHand].bet);
                 player.Balance -= player.Hands[player.currentHand].bet; //deduct bet for new hand
                 player.Hands.Add(newHand);
@@ -354,14 +321,15 @@ namespace Poker
                 player.currentHand--;
                 
             }
+            else { }
         }
         public void Hit()
         {
-            Blackjackplayer player = Players[currentPlayer ] as Blackjackplayer;//nakon betting runde currentplayer je na 1 a treba da je na 0
+            Player player = Players[currentPlayer ];
             GameDeck.Deal(player);
             if (player.Hands[player.currentHand].getHandValue()>21)
             {
-                dealer.Balance += player.Hands[player.currentHand].bet; //fix
+                dealer.Balance += player.Hands[player.currentHand].bet; 
                 player.Hands[player.currentHand].bet = 0;
                 player.currentHand++;
                 if (player.IsDone())
@@ -379,7 +347,7 @@ namespace Poker
         }
         public void Stand()
         {
-            Blackjackplayer player = Players[currentPlayer] as Blackjackplayer;
+            Player player = Players[currentPlayer];
             player.currentHand++;
             if (player.IsDone())
             {
@@ -394,7 +362,7 @@ namespace Poker
         }
         public void DoubleDown()
         {
-            Blackjackplayer player = Players[currentPlayer ] as Blackjackplayer;
+            Player player = Players[currentPlayer ];
             if (player.Balance >= player.Hands[player.currentHand].bet)
             {
                 player.Hands[player.currentHand].bet *= 2;
@@ -406,7 +374,7 @@ namespace Poker
                     dealer.Balance += player.Hands[player.currentHand].bet;
                     player.Hands[player.currentHand].bet = 0;
                     player.currentHand++;
-                    if (player.IsDone())//check for error
+                    if (player.IsDone())
                     {
                         currentPlayer++;
                     }
@@ -424,25 +392,10 @@ namespace Poker
 
         }
     }
-    public class Pokerplayer 
+    
+    public class BlackjackDealer : Player
     {
-
-
-
-    }
-    public class Blackjackplayer : Player
-    {
-        public Blackjackplayer(string name, float balance) : base(name, balance)
-        {
-
-        }
-
-        
-
-    }
-    public class BlackjackDealer : Blackjackplayer
-    {
-        public BlackjackDealer() : base("Dealer", 10000)
+        public BlackjackDealer() : base("Dealer", 1000000)
         {
         }
             
@@ -450,6 +403,386 @@ namespace Poker
 
     }
 
+    public class Simulation
+    {
+        public void Dispose()
+        {
+            // Očisti resurse
+            GC.Collect();  // Prinudi garbage collector
+        }
+        public int pV = 0;
+        public int dV = 0;
+        public string Action = "";
+        
+        public int wins = 0;
+        public int losses = 0;
+        public int draws = 0;
+        public StrategyManager manager = new StrategyManager();
+        public Strategy strat;
+        public string mHandType = "";
+        int trials = 100000;
+        
+        public Simulation(int playerValue, int dealerValue, string action, Strategy strats, string handType)
+        {
+            this.pV = playerValue;
+            this.dV = dealerValue;
+            this.Action = action;
+            this.strat = strats;
+            mHandType = handType;
+        }
+
+        private static Random _rnd = new Random();
+        public void simulate(int playerValue, int dealerValue,int thisaces, string action, string HandType)
+        {
+            int aces = thisaces;
+            int acesDealer = 0;
+            acesDealer = (dealerValue == 11) ? 1 : 0;
+            
+            int randomValue = _rnd.Next(2, 15);//kada imamo soft hand kec se sam dodaje pa dobijemo infinite loop
+            void stand()
+            {
+                randomValue = 0;
+                while (dealerValue < 17)
+                {
+                    randomValue = _rnd.Next(2,15);
+                    if (randomValue == 11)
+                    {
+                       
+                        randomValue = 11;
+                        acesDealer++;
+                    }
+                    else if (randomValue >10 )
+                    {
+                        randomValue = 10;
+                    }
+                    dealerValue += randomValue;
+                    if(dealerValue > 21 && acesDealer > 0)
+                    {
+                        while (dealerValue > 21 && acesDealer > 0)
+                        {
+                            dealerValue -= 10;
+                            acesDealer--;
+                        }
+                    }
+                    
+                }
+                if (dealerValue > 21 || playerValue > dealerValue)
+                {
+                    wins++;
+
+                }
+                else if (playerValue == dealerValue)
+                {
+                    draws++;
+
+                }
+                else
+                {
+                    losses++;
+
+                }
+            }
+            randomValue = _rnd.Next(2,15);
+            if (randomValue == 11)
+            {
+                
+                randomValue = 11;
+                aces++;
+            }
+            else if (randomValue >10)
+            {
+                randomValue = 10;
+            }
+            if (HandType == "hard")
+            {
+                if (action == "stand")
+                {
+                    stand();
+                }
+                else if (action == "double")
+                {
+                    playerValue += randomValue;
+                    if (playerValue > 21 && aces == 0)
+                    {
+                        losses++;
+                    }
+                    else if (playerValue > 21 && aces > 0)
+                    {
+                        while (playerValue > 21 && aces > 0)
+                        {
+                            playerValue -= 10;
+                            aces--;
+                        }
+                        stand();
+                    }
+                    else
+                    {
+                        stand();
+                    }
+
+                }//paziti na zagradu
+                    else if (action == "hit")
+                    {
+                        playerValue += randomValue;
+                        if (playerValue > 21 && aces == 0)
+                        {
+                            losses++;
+                        }
+                        else if (playerValue > 21 && aces > 0)
+                        {
+                            while (playerValue > 21 && aces > 0)
+                            {
+                                playerValue -= 10;
+                                aces--;
+                            }
+                            if(playerValue > 17)
+                            {
+                                stand();
+                            }
+                            else if (strat.getBestAction("hard", playerValue, dealerValue) == "double" || strat.getBestAction("hard", playerValue, dealerValue) == "stand" || strat.getBestAction("hard", playerValue, dealerValue) == "split")
+                            {
+                                stand();
+                            }
+                            else { simulate(playerValue, dealerValue, aces,action,HandType); }
+                        }
+                        else if (playerValue > 17)
+                        {
+                            stand();
+                        }
+                        else
+                        {
+                            if (strat.getBestAction("hard", playerValue, dealerValue) == "double" || strat.getBestAction("hard", playerValue, dealerValue) == "stand")
+                            {
+                                stand();
+                            }
+                            else { simulate(playerValue, dealerValue, aces,action,HandType); }
+                        }
+                    }
+
+
+                
+            }
+            else if (HandType == "soft")
+            {
+                aces++;
+                if (action == "stand")
+                {
+                    stand();
+                }
+                else if (action == "double")
+                {
+                    playerValue += randomValue;
+                    if (playerValue > 21 && aces == 0)
+                    {
+                        losses++;
+                    }
+                    else if (playerValue > 21 && aces > 0)
+                    {
+                        while (playerValue > 21 && aces > 0)
+                        {
+                            playerValue -= 10;
+                            aces--;
+                        }
+                        stand();
+                    }
+                    else
+                    {
+                        stand();
+                    }
+                }
+                else if (action == "hit")
+                {
+                    playerValue += randomValue;
+                    if (playerValue > 21 && aces == 0)
+                    {
+                        losses++;
+                    }
+                    else if (playerValue > 21 && aces > 0)
+                    {
+                        while (playerValue > 21 && aces > 0)
+                        {
+                            playerValue -= 10;
+                            aces--;
+                        }
+                        if (aces == 0) { 
+                            HandType = "hard";
+                        }
+                        if(playerValue > 17)
+                        {
+                            stand();
+                        }
+                        else if (strat.getBestAction("hard", playerValue, dealerValue) == "double" || strat.getBestAction("hard", playerValue, dealerValue) == "stand" || strat.getBestAction("hard", playerValue, dealerValue) == "split")
+                        {
+                            stand();
+                        }
+                        else { simulate(playerValue, dealerValue, aces, action, HandType); }
+                    }
+                    else if (playerValue > 17)
+                    {
+                        stand();
+                    }
+                    else
+                    {
+                        if (strat.getBestAction("hard", playerValue, dealerValue) == "double" || strat.getBestAction("hard", playerValue, dealerValue) == "stand")
+                        {
+                            stand();
+                        }
+                        else { simulate(playerValue, dealerValue, aces, action, HandType); }
+
+                    }
+                }
+
+
+            }
+            else if (HandType == "pair")
+            {
+                if(playerValue == 22)
+                {
+                    playerValue = 12;
+                    aces++;
+                }
+                if (action == "stand")
+                {
+                    stand();
+                }
+                else if (action == "double")
+                {
+                    playerValue += randomValue;
+                    if (playerValue > 21 && aces == 0)
+                    {
+                        losses++;
+                    }
+                    else if (playerValue > 21 && aces > 0)
+                    {
+                        while (playerValue > 21 && aces > 0)
+                        {
+                            playerValue -= 10;
+                            aces--;
+                        }
+                        stand();
+                    }
+                    else
+                    {
+                        stand();
+                    }
+                }
+                else if (action == "hit")
+                {
+                    playerValue += randomValue;
+                    if (playerValue > 21 && aces == 0)
+                    {
+                        losses++;
+                    }
+                    else if (playerValue > 21 && aces > 0)
+                    {
+                        while (playerValue > 21 && aces > 0)
+                        {
+                            playerValue -= 10;
+                            aces--;
+                        }
+                        if(playerValue > 17)
+                        {
+                            stand();
+                        }
+                        else if (strat.getBestAction("hard", playerValue, dealerValue) == "double" || strat.getBestAction("hard", playerValue, dealerValue) == "stand" || strat.getBestAction("hard", playerValue, dealerValue) == "split")
+                        {
+                            stand();
+                        }
+                        else { simulate(playerValue, dealerValue, aces, action, HandType); }
+                    }
+                    else if (playerValue > 17)
+                    {
+                        stand();
+                    }
+                    else
+                    {
+                        if (strat.getBestAction("hard", playerValue, dealerValue) == "double" || strat.getBestAction("hard", playerValue, dealerValue) == "stand")
+                        {
+                            stand();
+                        }
+                        else { simulate(playerValue, dealerValue, aces, action, HandType); }
+
+                    }
+                }
+                else if (action == "split")
+                {
+                    playerValue = playerValue/2;
+
+                    randomValue = _rnd.Next(2,15);
+                    int aceTemp = aces;
+                    if (randomValue == 11)
+                    {
+                        randomValue = 11;
+                        aces++;
+                       
+                    }
+                    else if (randomValue > 10)
+                    {
+                        
+                        randomValue = 10;
+                    }
+                    if (randomValue == playerValue)
+                    {
+                        HandType = "pair";
+                    }
+                    else { HandType = "hard"; }
+                    
+                    int a = playerValue;
+                    playerValue = playerValue + randomValue;
+                    string bestAction = strat.getBestAction("hard", playerValue, dealerValue);
+                    
+                    string temp = action;
+                    action = bestAction;
+                    
+                    simulate(playerValue, dealerValue, aces, action, HandType);
+                    playerValue = a;
+                    aces = aceTemp;
+                    randomValue = _rnd.Next(2, 15);
+                    if (randomValue == 11)
+                    {
+                        
+                        randomValue = 11;
+                        aces++;
+
+                    }
+                    
+                    else if (randomValue >10)
+                    {
+                        randomValue = 10;
+                    }
+                    if (randomValue == playerValue)
+                    {
+                        HandType = "pair";
+                    }
+                    else { HandType = "hard"; }
+                    playerValue = playerValue + randomValue;
+                    bestAction = strat.getBestAction("hard", playerValue, dealerValue);
+                    action = bestAction;
+                    simulate(playerValue, dealerValue,aces, action, HandType);
+                    action = temp;
+                    HandType = "pair";
+                }
+            }
+
+
+        }
+
+        public void runSimulation()
+        {
+            int aces = 0;
+            if(mHandType == "soft")
+            {
+                aces = 1;
+            }
+            for (int i = 0; i < trials; i++)
+            {
+                simulate(pV, dV, aces,Action,mHandType);
+            }
+        }
 
     }
+
+
+
+}
 

@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
+//aplikacija ima memory leak, slike se ucitavaju neefikasno i ostaju u memoriji
 namespace Poker
 {
     
@@ -158,7 +158,7 @@ namespace Poker
             this.Balances = balances;
             for(int i = 0; i<Names.Count; i++)
             {
-                Blackjackplayer player = new Blackjackplayer(Names[i], Balances[i]);
+                Player player = new Player(Names[i], Balances[i]);
                 players.Add(player);
             }
             BlackjackDealer dealer = new BlackjackDealer();
@@ -173,15 +173,12 @@ namespace Poker
         {
             game.Stand();
             UpdatePlayerPanels();
-            
-            
         }
 
         private void Hit_Click(object sender, EventArgs e)
         {
             game.Hit();
             UpdatePlayerPanels();
-
         }
 
         private void DoubleDown_Click(object sender, EventArgs e)
@@ -222,8 +219,8 @@ namespace Poker
                 this.Stand.Show();
                 this.DoubleDown.Show();
                 this.Split.Show();
-                //game.start1();
-                game.start2();
+                
+                game.DealInitialCards();
                 currentBettingPlayer = 0;
                 UpdatePlayerPanels();
                 balance.Show();
@@ -251,6 +248,11 @@ namespace Poker
         private void balance_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

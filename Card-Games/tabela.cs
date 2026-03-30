@@ -23,20 +23,20 @@ public class StrategyEntry
     public double DrawDouble = 0;
     public double doubleEv = 0;
     public int Trials { get; set; }
-    public string bestAction { get; set; }
+    public string BestAction { get; set; }
 
     public StrategyEntry(string handType, int handValue, int dealerUpcard)
     {
         HandType = handType;
         HandValue = handValue;
         DealerUpcard = dealerUpcard;
-        this.bestAction = "stand";
+        BestAction = "stand";
 
         Trials = 0;
         //umesto gledanja action staviti sve u jedan entry i onda uzeti max na kraju pa to staviti kao best action
 
     }
-    public void setEv()
+    public void SetEv()
     {
         hitEv = (WinsHit - LosesHit) / 100000;
         standEv = (WinsStand - LosesStand) / 100000;
@@ -47,9 +47,9 @@ public class StrategyEntry
         }
         doubleEv = 2*(WinsDouble - LosesDouble) / 100000;
     }
-    public void setBestAction()
+    public void SetBestAction()
     {
-        setEv();
+        SetEv();
         Dictionary<string, double> actionEvs = new Dictionary<string, double>
         {
             { "hit", hitEv },
@@ -57,53 +57,15 @@ public class StrategyEntry
             { "split", splitEv },
             { "double", doubleEv }
         };
-        bestAction = "stand";
+        BestAction = "stand";
         double maxEv = double.NegativeInfinity;
         foreach (var action in actionEvs)
         {
             if (action.Value > maxEv)
             {
                 maxEv = action.Value;
-                bestAction = action.Key;
+                BestAction = action.Key;
             }
-        }
-    }
-}
-
-
-public class Strategy
-{
-    public Strategy() { }
-    public Strategy(int trials, List<StrategyEntry> tabela)
-    {
-        TrialsPerCell = trials;
-        this.tabela = tabela;
-    }
-    public int TrialsPerCell { get; set; }
-
-    public string getBestAction(string handType, int handValue, int dealerUpcard)
-    {
-
-        if (handValue >= 21) return "stand";
-        if (handValue < 8) return "hit";
-
-        string kljuc = handType + handValue + "vs" + dealerUpcard;
-
-        if (strategija.TryGetValue(kljuc, out var entry))
-        {
-
-            return entry.bestAction;
-        }
-
-        return (handValue < 17) ? "hit" : "stand";
-    }
-
-    public List<StrategyEntry> tabela { get; set; }
-    public Dictionary<string, StrategyEntry> strategija = new Dictionary<string, StrategyEntry>();
-    public void AddEntry(StrategyEntry entry, string name)
-    {
-        if (!strategija.ContainsKey(name)){
-            strategija.Add(name, entry);
         }
     }
 }

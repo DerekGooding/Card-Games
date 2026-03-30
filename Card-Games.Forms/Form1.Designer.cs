@@ -99,7 +99,7 @@ partial class Form1
         this.bet_amount.Name = "bet_amount";
         this.bet_amount.Size = new System.Drawing.Size(117, 45);
         this.bet_amount.TabIndex = 5;
-        this.bet_amount.Scroll += new System.EventHandler(this.bet_amount_Scroll);
+        this.bet_amount.Scroll += new System.EventHandler(this.Bet_amount_Scroll);
         // 
         // panel1
         // 
@@ -133,7 +133,7 @@ partial class Form1
         this.betting_button.TabIndex = 6;
         this.betting_button.Text = "Bet";
         this.betting_button.UseVisualStyleBackColor = true;
-        this.betting_button.Click += new System.EventHandler(this.betting_button_Click);
+        this.betting_button.Click += new System.EventHandler(this.Betting_button_Click);
         // 
         // Start
         // 
@@ -171,7 +171,7 @@ partial class Form1
         this.balance.Size = new System.Drawing.Size(35, 13);
         this.balance.TabIndex = 18;
         this.balance.Text = "label1";
-        this.balance.Click += new System.EventHandler(this.balance_Click);
+        this.balance.Click += new System.EventHandler(this.Balance_Click);
         // 
         // trenutnaRuka
         // 
@@ -204,7 +204,7 @@ partial class Form1
         this.exit.TabIndex = 8;
         this.exit.Text = "exit";
         this.exit.UseVisualStyleBackColor = false;
-        this.exit.Click += new System.EventHandler(this.exit_Click);
+        this.exit.Click += new System.EventHandler(this.Exit_Click);
         // 
         // Form1
         // 

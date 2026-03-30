@@ -4,9 +4,9 @@ public class MainStart
 {
     public static void RunSim(string[] args)
     {
-        Dictionary<string, int> cases = new Dictionary<string, int>();
-        int trials = 100000;
-        List<StrategyEntry> strategyEntries = new List<StrategyEntry>();
+        Dictionary<string, int> cases = [];
+        const int trials = 100000;
+        List<StrategyEntry> strategyEntries = [];
         Strategy strategy = new Strategy(trials, strategyEntries);
         StrategyManager manager = new StrategyManager();
 
@@ -16,7 +16,7 @@ public class MainStart
             {
                 StrategyEntry entry = new StrategyEntry("hard", i, dealerCard);
                 Simulation simulation = new Simulation(i, dealerCard, "stand",strategy,"hard");
-                simulation.runSimulation();
+                simulation.RunSimulation();
                 entry.WinsStand = simulation.wins;
                 entry.LosesStand = simulation.losses;
                 entry.DrawStand = simulation.draws;
@@ -24,20 +24,20 @@ public class MainStart
                 simulation.Dispose();
 
                 Simulation simulation1 = new Simulation(i, dealerCard, "double", strategy, "hard");
-                simulation1.runSimulation();
+                simulation1.RunSimulation();
                 entry.WinsDouble = simulation1.wins;
                 entry.LosesDouble = simulation1.losses;
                 entry.DrawDouble = simulation1.draws;
                 simulation1.Dispose();
 
                 Simulation simulation2 = new Simulation(i, dealerCard, "hit", strategy, "hard");
-                simulation2.runSimulation();
+                simulation2.RunSimulation();
                 entry.WinsHit = simulation2.wins;
                 entry.LosesHit = simulation2.losses;
                 entry.DrawHit = simulation2.draws;
                 strategy.AddEntry(entry, "hard" + i +"vs"+ dealerCard);
                 simulation2.Dispose();
-                entry.setBestAction();
+                entry.SetBestAction();
             }
 
         }
@@ -47,27 +47,27 @@ public class MainStart
             {
                 StrategyEntry entry = new StrategyEntry("soft", i, dealerCard);
                 Simulation simulation = new Simulation(i+11, dealerCard, "stand", strategy, "soft");
-                simulation.runSimulation();
+                simulation.RunSimulation();
                 entry.WinsStand = simulation.wins;
                 entry.LosesStand = simulation.losses;
                 entry.DrawStand = simulation.draws;
                 simulation.Dispose();
 
                 Simulation simulation1 = new Simulation(i+11, dealerCard, "double", strategy, "soft");
-                simulation1.runSimulation();
+                simulation1.RunSimulation();
                 entry.WinsDouble = simulation1.wins;
                 entry.LosesDouble = simulation1.losses;
                 entry.DrawDouble = simulation1.draws;
                 simulation1.Dispose();
 
                 Simulation simulation2 = new Simulation(i+11, dealerCard, "hit", strategy, "soft");
-                simulation2.runSimulation();
+                simulation2.RunSimulation();
                 entry.WinsHit = simulation2.wins;
                 entry.LosesHit = simulation2.losses;
                 entry.DrawHit = simulation2.draws;
                 strategy.AddEntry(entry, "soft" + i + "vs" + dealerCard);
                 simulation2.Dispose();
-                entry.setBestAction();
+                entry.SetBestAction();
             }
         }
         for (int i = 4; i < 22; i +=2) {
@@ -76,34 +76,34 @@ public class MainStart
             {
                 StrategyEntry entry = new StrategyEntry("pair", i, dealerCard);
                 Simulation simulation = new Simulation(i , dealerCard, "stand", strategy, "pair");
-                simulation.runSimulation();
+                simulation.RunSimulation();
                 entry.WinsStand = simulation.wins;
                 entry.LosesStand = simulation.losses;
                 entry.DrawStand = simulation.draws;
                 simulation.Dispose();
 
                 Simulation simulation1 = new Simulation(i, dealerCard, "double", strategy, "pair");
-                simulation1.runSimulation();
+                simulation1.RunSimulation();
                 entry.WinsDouble = simulation1.wins;
                 entry.LosesDouble = simulation1.losses;
                 entry.DrawDouble = simulation1.draws;
                 simulation1.Dispose();
 
                 Simulation simulation2 = new Simulation(i, dealerCard, "hit", strategy, "pair");
-                simulation2.runSimulation();
+                simulation2.RunSimulation();
                 entry.WinsHit = simulation2.wins;
                 entry.LosesHit = simulation2.losses;
                 entry.DrawHit = simulation2.draws;
                 simulation2.Dispose();
 
                 Simulation simulation3 = new Simulation(i, dealerCard, "split", strategy, "pair");
-                simulation3.runSimulation();
+                simulation3.RunSimulation();
                 entry.WinsSplit = simulation3.wins;
                 entry.LosesSplit = simulation3.losses;
                 entry.DrawSplit = simulation3.draws;
                 strategy.AddEntry(entry, "pair" + i + "vs" + dealerCard);
                 simulation2.Dispose();
-                entry.setBestAction();
+                entry.SetBestAction();
 
             }
         }

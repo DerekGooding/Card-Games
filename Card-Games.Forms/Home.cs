@@ -2,10 +2,7 @@
 
 public partial class Home : Form
 {
-    public Home()
-    {
-        InitializeComponent();
-    }
+    public Home() => InitializeComponent();
     bool blackjack = false;
     bool poker = false;
     private void Blackjack_Click(object sender, EventArgs e)
@@ -13,12 +10,12 @@ public partial class Home : Form
         poker = false;
         blackjack = true;
     }
-    public List<string> listnames = new List<string>();
-    public List<int> listbalances = new List<int>();
+    public List<string> listnames = [];
+    public List<int> listbalances = [];
 
-    private void addplayer_Click(object sender, EventArgs e)
+    private void AddPlayer_Click(object sender, EventArgs e)
     {
-        if (Name.Text == "" || Balance.Text == "")
+        if (Name.Text.Length == 0 || Balance.Text.Length == 0)
         {
             MessageBox.Show("Please enter a name and balance");
             return;
@@ -44,10 +41,10 @@ public partial class Home : Form
         Balance.Clear();
     }
 
-    private void start_Click(object sender, EventArgs e)
+    private void Start_Click(object sender, EventArgs e)
     {
         Form1 form1 = new Form1(listnames, listbalances);
         form1.Show();
-        this.Hide();
+        Hide();
     }
 }

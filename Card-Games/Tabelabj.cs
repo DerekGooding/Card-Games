@@ -1,40 +1,23 @@
 ﻿namespace Card_Games;
 
-internal class Tabelabj
+internal class TabelAbj
 {
-    public class StrategyEntry
+    public class StrategyEntry(string handType, int handValue, int dealerUpcard, string theAction)
     {
-        public string HandType { get; set; }      // "Hard", "Soft", "Pair"
-        public int HandValue { get; set; }        // 3-19 za hard, 2-9 za soft, 1-10 za pair
-        public int DealerUpcard { get; set; }     // 2-11 (11 = Ace)
-        public string Action { get; set; }    // "Stand", "Hit", "Double", "Split"
-        public double Wins { get; set; }       // Statistika 
-        public double Loses { get; set; }
-        public double Draw { get; set; }
-        public int Trials { get; set; }           // Broj simulacija
-
-        public StrategyEntry(string handType, int handValue, int dealerUpcard, string theAction)
-        {
-            HandType = handType;
-            HandValue = handValue;
-            DealerUpcard = dealerUpcard;
-            Action = theAction;
-            Wins = 0;
-            Loses = 0;
-            Draw = 0;
-            Trials = 0;
-        }
+        public string HandType { get; set; } = handType;
+        public int HandValue { get; set; } = handValue;
+        public int DealerUpCard { get; set; } = dealerUpcard;
+        public string Action { get; set; } = theAction;
+        public double Wins { get; set; } = 0;
+        public double Loses { get; set; } = 0;
+        public double Draw { get; set; } = 0;
+        public int Trials { get; set; } = 0;
     }
 
 
-    public class Strategy
+    public class Strategy(int trials, List<TabelAbj.StrategyEntry> tabela)
     {
-        public Strategy(int trials, List<StrategyEntry> tabela)
-        {
-            TrialsPerCell = trials;
-            this.tabela = tabela;
-        }
-        public int TrialsPerCell { get; set; }
-        public List<StrategyEntry> tabela { get; set; }
+        public int TrialsPerCell { get; set; } = trials;
+        public List<StrategyEntry> Tabela { get; set; } = tabela;
     }
 }

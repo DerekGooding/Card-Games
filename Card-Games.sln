@@ -5,8 +5,6 @@ VisualStudioVersion = 18.3.11408.92
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Card-Games", "Card-Games\Card-Games.csproj", "{AB2A4FF0-58CE-FCDC-5FB3-D905C8E05771}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poker", "Poker.csproj", "{49FD8DBD-C377-4891-904F-58A50F912020}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Card-Games.Test", "Card-Games.Test\Card-Games.Test.csproj", "{B6DD8C53-9A00-0B38-2B17-5AA3BDC8D28D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Card-Games.Forms", "Card-Games.Forms\Card-Games.Forms.csproj", "{98C6B5DA-43F2-8102-5B9C-C23FF32816B7}"
@@ -23,10 +21,6 @@ Global
 		{AB2A4FF0-58CE-FCDC-5FB3-D905C8E05771}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB2A4FF0-58CE-FCDC-5FB3-D905C8E05771}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB2A4FF0-58CE-FCDC-5FB3-D905C8E05771}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49FD8DBD-C377-4891-904F-58A50F912020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49FD8DBD-C377-4891-904F-58A50F912020}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49FD8DBD-C377-4891-904F-58A50F912020}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49FD8DBD-C377-4891-904F-58A50F912020}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B6DD8C53-9A00-0B38-2B17-5AA3BDC8D28D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6DD8C53-9A00-0B38-2B17-5AA3BDC8D28D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6DD8C53-9A00-0B38-2B17-5AA3BDC8D28D}.Release|Any CPU.ActiveCfg = Release|Any CPU

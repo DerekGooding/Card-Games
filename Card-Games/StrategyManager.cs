@@ -5,6 +5,19 @@ namespace Card_Games;
 
 public class StrategyManager
 {
+    private static readonly JsonSerializerOptions _saveOptions = new()
+    {
+        WriteIndented = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        IncludeFields = true,
+        NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+    };
+
+    private static readonly JsonSerializerOptions _loadOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
 
     public static void SaveStrategyToJson(Strategy strategy, string filePath)
     {
@@ -17,17 +30,7 @@ public class StrategyManager
                 Directory.CreateDirectory(directory);
             }
 
-            // Konvertuj u JSON sa lepim formatiranjem
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                IncludeFields = true,
-                NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
-
-            };
-
-            string json = JsonSerializer.Serialize(strategy, options);
+            string json = JsonSerializer.Serialize(strategy, _saveOptions);
 
             // Napiši u fajl
             File.WriteAllText(filePath, json);
@@ -51,12 +54,7 @@ public class StrategyManager
 
             string json = File.ReadAllText(filePath);
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-
-            Strategy strategy = JsonSerializer.Deserialize<Strategy>(json, options);
+            Strategy strategy = JsonSerializer.Deserialize<Strategy>(json, _loadOptions);
 
             Console.WriteLine($"✓ Strategija učitana: {filePath}");
             return strategy;
